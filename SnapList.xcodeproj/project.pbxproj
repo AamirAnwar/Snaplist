@@ -14,6 +14,7 @@
 		438756991EBFF915007F6F0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438756971EBFF915007F6F0C /* LaunchScreen.storyboard */; };
 		43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */; };
 		43A2943B1F0EC74B0036CDA6 /* SNListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */; };
+		43A2943D1F0ED6350036CDA6 /* SNCreateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		4387569A1EBFF915007F6F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNListViewController.swift; sourceTree = "<group>"; };
 		43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNListTableViewCell.swift; sourceTree = "<group>"; };
+		43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNCreateItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				4387568E1EBFF915007F6F0C /* AppDelegate.swift */,
 				438756901EBFF915007F6F0C /* ViewController.swift */,
+				43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */,
 				43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */,
 				43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */,
 				438756921EBFF915007F6F0C /* Main.storyboard */,
@@ -147,6 +150,7 @@
 				438756911EBFF915007F6F0C /* ViewController.swift in Sources */,
 				43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */,
 				4387568F1EBFF915007F6F0C /* AppDelegate.swift in Sources */,
+				43A2943D1F0ED6350036CDA6 /* SNCreateItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

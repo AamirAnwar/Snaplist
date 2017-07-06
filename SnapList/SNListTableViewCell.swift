@@ -9,20 +9,16 @@
 import UIKit
 
 class SNListTableViewCell: UITableViewCell {
-    let titleLabel:UILabel
-    let descriptionLabel:UILabel
+    let titleLabel:UILabel = UILabel()
+    let descriptionLabel:UILabel = UILabel()
     
     required init?(coder aDecoder: NSCoder) {
-        titleLabel = UILabel()
-        descriptionLabel = UILabel()
         super.init(coder: aDecoder)
         createViews()
     }
     
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        titleLabel = UILabel()
-        descriptionLabel = UILabel()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         createViews()
     }
