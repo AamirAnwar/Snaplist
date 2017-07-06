@@ -8,18 +8,21 @@
 
 import UIKit
 
+let PADDING_13:CGFloat = 13.0
+
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet var headingLabel:UILabel!
+    @IBOutlet var addListButton:UIButton!
+    @IBOutlet var joinListButton:UIButton!
+    
+    @IBAction func didTapAddListButton() {
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func didTapJoinListButton() {
+    
     }
-
-
+    
 }
 
