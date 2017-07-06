@@ -12,16 +12,18 @@ let PADDING_13:CGFloat = 13.0
 
 class ViewController: UIViewController {
 
-    @IBOutlet var headingLabel:UILabel!
-    @IBOutlet var addListButton:UIButton!
-    @IBOutlet var joinListButton:UIButton!
+    @IBOutlet weak var headingLabel:UILabel!
+    @IBOutlet weak var addListButton:UIButton!
+    @IBOutlet weak var joinListButton:UIButton!
     
     @IBAction func didTapAddListButton() {
-        
+        // Make create API call here
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapJoinListButton() {
-    
+        // Make join API call here
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

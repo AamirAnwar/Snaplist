@@ -8,18 +8,38 @@
 
 import UIKit
 
-class SNListViewController: UIViewController {
+class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var listTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        listTableView.rowHeight = UITableViewAutomaticDimension
+        listTableView.estimatedRowHeight = 44
+        listTableView.register(SNListTableViewCell.self, forCellReuseIdentifier: "listcell")
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "initialViewController")
+        
+        if let vc = initialViewController as? ViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = listTableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? SNListTableViewCell
+        if cell == nil {
+            cell = SNListTableViewCell.init(style: .default, reuseIdentifier: "listcell")
+        }
+        
+        return cell!
+    }
 }
