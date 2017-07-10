@@ -24,6 +24,15 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let vc = initialViewController as? ViewController {
             self.present(vc, animated: true, completion: nil)
         }
+        
+        self.navigationItem.setRightBarButton(UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(didTapAddItem)), animated: true)
+        
+        
+    }
+    
+    func didTapAddItem(sender:AnyObject) {
+        
+        self.present(SNCreateItemViewController(), animated: true, completion: nil)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
