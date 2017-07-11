@@ -8,6 +8,7 @@
 
 import UIKit
 let PADDING_8:CGFloat = 8
+let STATUS_BAR_HEIGHT:CGFloat = 22
 class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     let cancelButton = UIButton(type: UIButtonType.system)
@@ -26,10 +27,10 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willShowKeyboard) , name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willHideKeyboard) , name: Notification.Name.UIKeyboardWillHide, object: nil)
-        
+        view.backgroundColor = UIColor.white
         containerView.frame = view.frame
         containerView.backgroundColor = UIColor.white
-        containerScrollView.frame = view.frame
+        containerScrollView.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y + STATUS_BAR_HEIGHT, width: view.frame.size.width, height: view.frame.size.height - STATUS_BAR_HEIGHT)
         cancelButton.setTitle("Cancel", for: .normal)
         createButton.setTitle("Create", for: .normal)
         
@@ -46,14 +47,17 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         
         titleTextField.layer.borderColor = UIColor.black.cgColor
         titleTextField.layer.borderWidth = 1
+        titleTextField.delegate = self
         
         createButton.backgroundColor = UIColor.black
         createButton.setTitleColor(UIColor.white, for: .normal)
         
         cancelButton.backgroundColor = UIColor.black
         cancelButton.setTitleColor(UIColor.white, for: .normal)
+        cancelButton.layer.cornerRadius = 4
+        cancelButton.addTarget(self, action: #selector(SNCreateItemViewController.cancelButtonTapped), for: .touchUpInside)
 
-        containerView.addSubview(cancelButton)
+        view.addSubview(cancelButton)
         containerView.addSubview(createButton)
         containerView.addSubview(createItemHeadingLabel)
         containerView.addSubview(titleLabel)
@@ -61,13 +65,12 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         containerView.addSubview(descriptionLabel)
         containerView.addSubview(descriptionTextView)
         containerView.addSubview(createButton)
-        
         containerScrollView.addSubview(containerView)
-        
         containerScrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height)
         view.addSubview(containerScrollView)
+        view.bringSubview(toFront: cancelButton)
         
-        cancelButton.frame = CGRect(x: PADDING_8, y: PADDING_8 + 22, width: cancelButton.intrinsicContentSize.width + 2*PADDING_8, height: cancelButton.intrinsicContentSize.height)
+        cancelButton.frame = CGRect(x: PADDING_8, y: PADDING_8 + STATUS_BAR_HEIGHT, width: cancelButton.intrinsicContentSize.width + 2*PADDING_8, height: cancelButton.intrinsicContentSize.height)
         
         createItemHeadingLabel.frame = CGRect(x: containerView.center.x - (createItemHeadingLabel.frame.size.width)/2, y: cancelButton.frame.origin.y + cancelButton.frame.size.height + PADDING_13, width: createItemHeadingLabel.frame.size.width, height: createItemHeadingLabel.frame.size.height)
         
@@ -80,6 +83,8 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         descriptionTextView.frame = CGRect(x: PADDING_8, y: descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height + PADDING_13, width: containerView.frame.size.width - 2*PADDING_8, height: 132)
         
         createButton.frame = CGRect(x: PADDING_8, y: descriptionTextView.frame.origin.y + descriptionTextView.frame.size.height + PADDING_13, width: containerView.frame.size.width - 2*PADDING_8, height: createButton.intrinsicContentSize.height)
+        
+
     }
     
     func willShowKeyboard() {
@@ -92,6 +97,12 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
+    }
+    
+    func cancelButtonTapped() {
+        self.descriptionTextView.resignFirstResponder()
+        self.titleLabel.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
