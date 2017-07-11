@@ -31,6 +31,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         containerView.frame = view.frame
         containerView.backgroundColor = UIColor.white
         containerScrollView.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y + STATUS_BAR_HEIGHT, width: view.frame.size.width, height: view.frame.size.height - STATUS_BAR_HEIGHT)
+        containerScrollView.isScrollEnabled = false
         cancelButton.setTitle("Cancel", for: .normal)
         createButton.setTitle("Create", for: .normal)
         
@@ -89,6 +90,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     func willShowKeyboard() {
         containerScrollView.setContentOffset(CGPoint(x:containerScrollView.contentOffset.x,y:40), animated: true)
+        
     }
     
     func willHideKeyboard() {
