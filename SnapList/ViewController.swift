@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Alamofire
 
-let PADDING_13:CGFloat = 13.0
-
+let kpadding13:CGFloat = 13.0
+let basePath = "https://snaplist-server.herokuapp.com/api"
 class ViewController: UIViewController {
 
     @IBOutlet weak var headingLabel:UILabel!
@@ -19,7 +20,9 @@ class ViewController: UIViewController {
     
     @IBAction func didTapAddListButton() {
         // Make create API call here
-        self.dismiss(animated: true, completion: nil)
+      createList()
+        
+    //    self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapJoinListButton() {
@@ -29,8 +32,17 @@ class ViewController: UIViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
-    
-    
-    
 }
+
+extension ViewController {
+    func createList() {
+        let params:Parameters = ["name":"aamir","email":"aamir.anwar@gmail.com","password":"aamir"]
+        Alamofire.request("\(basePath)/user", method: .post, parameters: params).responseJSON { (response) in
+            print(response)
+        }
+        
+        
+    }
+}
+
 
