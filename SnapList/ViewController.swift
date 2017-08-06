@@ -21,8 +21,6 @@ class ViewController: UIViewController {
     @IBAction func didTapAddListButton() {
         // Make create API call here
       createList()
-        
-    //    self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapJoinListButton() {
@@ -36,13 +34,26 @@ class ViewController: UIViewController {
 
 extension ViewController {
     func createList() {
-        let params:Parameters = ["name":"aamir","email":"aamir.anwar@gmail.com","password":"aamir"]
-        Alamofire.request("\(basePath)/user", method: .post, parameters: params).responseJSON { (response) in
-            print(response)
+        let userEndpoint:URLConvertible = "\(basePath)/user"
+        let params:[String:Any] = ["name":"aamir","email":"aamir.anwar@gmail.com","password":"aamir"]
+        
+        Alamofire.request(userEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            // Check response and proceed further
+            
+            guard response.result.isSuccess else {
+                print("Error")
+                return
+            }
+            guard let value = response.result.value as? [String:Any], let userID = value["id"] as? String else {
+                print("Bad Data")
+                return
+            }
+            print("Registered with ID : \(userID)")
+            self.dismiss(animated: true, completion: nil)
+            
         }
-        
-        
     }
 }
+
 
 
