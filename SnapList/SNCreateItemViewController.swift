@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Alamofire
 let PADDING_8:CGFloat = 8
 let STATUS_BAR_HEIGHT:CGFloat = 22
+let KeyShareCode = "SHARE_CODE"
+let NotificationItemAdded = "NotificationItemAdded"
 class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     let cancelButton = UIButton(type: UIButtonType.system)
@@ -22,16 +25,24 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     let containerScrollView = UIScrollView()
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func registerForNotification() {
         NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willShowKeyboard) , name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willHideKeyboard) , name: Notification.Name.UIKeyboardWillHide, object: nil)
-        view.backgroundColor = UIColor.white
+    }
+    
+    func createContainerView() {
         containerView.frame = view.frame
         containerView.backgroundColor = UIColor.white
         containerScrollView.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y + STATUS_BAR_HEIGHT, width: view.frame.size.width, height: view.frame.size.height - STATUS_BAR_HEIGHT)
         containerScrollView.isScrollEnabled = false
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        registerForNotification()
+        view.backgroundColor = UIColor.white
+        createContainerView()
         cancelButton.setTitle("Cancel", for: .normal)
         createButton.setTitle("Create", for: .normal)
         
@@ -52,6 +63,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         
         createButton.backgroundColor = UIColor.black
         createButton.setTitleColor(UIColor.white, for: .normal)
+        createButton.addTarget(self, action: #selector(SNCreateItemViewController.createButtonTapped), for: .touchUpInside)
         
         cancelButton.backgroundColor = UIColor.black
         cancelButton.setTitleColor(UIColor.white, for: .normal)
@@ -73,17 +85,17 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         
         cancelButton.frame = CGRect(x: PADDING_8, y: PADDING_8 + STATUS_BAR_HEIGHT, width: cancelButton.intrinsicContentSize.width + 2*PADDING_8, height: cancelButton.intrinsicContentSize.height)
         
-        createItemHeadingLabel.frame = CGRect(x: containerView.center.x - (createItemHeadingLabel.frame.size.width)/2, y: cancelButton.frame.origin.y + cancelButton.frame.size.height + PADDING_13, width: createItemHeadingLabel.frame.size.width, height: createItemHeadingLabel.frame.size.height)
+        createItemHeadingLabel.frame = CGRect(x: containerView.center.x - (createItemHeadingLabel.frame.size.width)/2, y: cancelButton.frame.origin.y + cancelButton.frame.size.height + kpadding13, width: createItemHeadingLabel.frame.size.width, height: createItemHeadingLabel.frame.size.height)
         
-        titleLabel.frame = CGRect(x: containerView.center.x - (titleLabel.frame.size.width)/2, y: createItemHeadingLabel.frame.origin.y + createItemHeadingLabel.frame.size.height + PADDING_13, width: titleLabel.frame.size.width, height: titleLabel.frame.size.height)
+        titleLabel.frame = CGRect(x: containerView.center.x - (titleLabel.frame.size.width)/2, y: createItemHeadingLabel.frame.origin.y + createItemHeadingLabel.frame.size.height + kpadding13, width: titleLabel.frame.size.width, height: titleLabel.frame.size.height)
         
-        titleTextField.frame = CGRect(x: PADDING_8, y: titleLabel.frame.origin.y + titleLabel.frame.size.height + PADDING_13, width: containerView.frame.size.width - 2*PADDING_8, height: 44)
+        titleTextField.frame = CGRect(x: PADDING_8, y: titleLabel.frame.origin.y + titleLabel.frame.size.height + kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: 44)
         
-        descriptionLabel.frame = CGRect(x: containerView.center.x - (descriptionLabel.frame.size.width)/2, y: titleTextField.frame.origin.y + titleTextField.frame.size.height + PADDING_13, width: descriptionLabel.frame.size.width, height: descriptionLabel.frame.size.height)
+        descriptionLabel.frame = CGRect(x: containerView.center.x - (descriptionLabel.frame.size.width)/2, y: titleTextField.frame.origin.y + titleTextField.frame.size.height + kpadding13, width: descriptionLabel.frame.size.width, height: descriptionLabel.frame.size.height)
         
-        descriptionTextView.frame = CGRect(x: PADDING_8, y: descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height + PADDING_13, width: containerView.frame.size.width - 2*PADDING_8, height: 132)
+        descriptionTextView.frame = CGRect(x: PADDING_8, y: descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height + kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: 132)
         
-        createButton.frame = CGRect(x: PADDING_8, y: descriptionTextView.frame.origin.y + descriptionTextView.frame.size.height + PADDING_13, width: containerView.frame.size.width - 2*PADDING_8, height: createButton.intrinsicContentSize.height)
+        createButton.frame = CGRect(x: PADDING_8, y: descriptionTextView.frame.origin.y + descriptionTextView.frame.size.height + kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: createButton.intrinsicContentSize.height)
         
 
     }
@@ -101,10 +113,35 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
     func cancelButtonTapped() {
         self.descriptionTextView.resignFirstResponder()
         self.titleLabel.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func createButtonTapped() {
+        // Add item API call
+        let addItemEndpoint = "\(basePath)/list/\(UserDefaults.standard.value(forKey: KeyListID)!)/item"
+        let title:String = titleTextField.text!
+        let content:String = descriptionTextView.text!
+        
+        Alamofire.request(addItemEndpoint, method: .post, parameters:["title":title,"content":content], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                return
+            }
+            guard let value = response.result.value as? [String:Any], let shareCode = value["shareCode"] as? String else {
+                return
+            }
+            // Refresh list page. TODO - Add locally and then sync with server (Possible diffing? IGListKit use case)
+            UserDefaults.standard.setValue(shareCode, forKey: KeyShareCode)
+            
+            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: NotificationItemAdded), object: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

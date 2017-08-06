@@ -13,7 +13,7 @@ class SNInviteViewController: UIViewController {
     @IBOutlet weak var shareCodeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        shareCodeLabel.text = "7723WFC"
+        shareCodeLabel.text = UserDefaults.standard.value(forKey: KeyShareCode) as? String
         // Do any additional setup after loading the view.
     }
 

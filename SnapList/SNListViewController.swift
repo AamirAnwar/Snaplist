@@ -7,20 +7,28 @@
 //
 
 import UIKit
+import Alamofire
 
 class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SNSideMenuViewDelegate {
 
     @IBOutlet weak var listTableView: UITableView!
     var sideMenuView:SNSideMenuView!
-
+    var listItems:Array<(title:String,content:String)> = Array()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Register for notification
+        NotificationCenter.default.addObserver(self, selector: #selector(SNListViewController.userLoggedIn), name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SNListViewController.itemAdded), name: NSNotification.Name(rawValue: NotificationItemAdded), object: nil)
+        
         sideMenuView = SNSideMenuView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         sideMenuView.transform = CGAffineTransform.init(translationX: -sideMenuView.frame.size.width, y: 0)
         sideMenuView.delegate = self
         self.navigationController?.view.addSubview(sideMenuView)
         listTableView.rowHeight = UITableViewAutomaticDimension
         listTableView.estimatedRowHeight = 44
+        listTableView.tableFooterView = UIView()
         listTableView.register(SNListTableViewCell.self, forCellReuseIdentifier: "listcell")
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -51,13 +59,23 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return max(1, listItems.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = listTableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? SNListTableViewCell
         if cell == nil {
             cell = SNListTableViewCell.init(style: .default, reuseIdentifier: "listcell")
+        }
+        
+        if listItems.isEmpty {
+            cell?.titleLabel.text = "Welcome to Snaplist"
+            cell?.descriptionLabel.text = "Press the add button on the top right to start adding items to your list!"
+        }
+        else {
+            let (title, content) = listItems[indexPath.row]
+            cell?.titleLabel.text = title
+            cell?.descriptionLabel.text = content
         }
         
         return cell!
@@ -84,5 +102,44 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.present(alertController, animated: true, completion: nil)
         
         
+    }
+
+    func refreshList() {
+        // Fetch existing items
+        let listItemsEndpoint = "\(basePath)/list/\(UserDefaults.standard.value(forKey: KeyListID)!)"
+        Alamofire.request(listItemsEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                return
+            }
+            
+            guard let value = response.result.value as? [String:Any], let listObject = value["list"] as? [String:Any] else {
+                return
+            }
+            if let shareCode = listObject["shareCode"] {
+                UserDefaults.standard.setValue(shareCode, forKey: KeyShareCode)
+            }
+            
+            if let items = listObject["items"] as? Array<[String:Any]> {
+                self.listItems.removeAll()
+                for item in items {
+                    if let item = item as? [String:String] {
+                        if let title = item["title"], let content = item["content"] {
+                            self.listItems.append((title, content))
+                        }
+                    }
+                }
+                
+            }
+            
+            self.listTableView.reloadData()
+        }
+    }
+    
+    func userLoggedIn() {
+        refreshList()
+    }
+    
+    func itemAdded() {
+        refreshList()
     }
 }

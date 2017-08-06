@@ -45,7 +45,7 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
         
         headingLabel.text = "Snaplist"
         headingLabel.sizeToFit()
-        headingLabel.frame = CGRect(x: containerView.center.x - headingLabel.frame.size.width/2 , y: containerView.frame.origin.y + 2*PADDING_13 + STATUS_BAR_HEIGHT, width: headingLabel.frame.size.width, height: headingLabel.frame.size.height)
+        headingLabel.frame = CGRect(x: containerView.center.x - headingLabel.frame.size.width/2 , y: containerView.frame.origin.y + 2*kpadding13 + STATUS_BAR_HEIGHT, width: headingLabel.frame.size.width, height: headingLabel.frame.size.height)
         headingLabel.textColor = UIColor.black
         containerView.addSubview(headingLabel)
         
