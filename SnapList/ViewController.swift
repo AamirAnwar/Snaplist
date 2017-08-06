@@ -14,12 +14,14 @@ let basePath = "https://snaplist-server.herokuapp.com/api"
 let NotificationUserLoggedSuccessfully = "userLoggedInSuccessfully"
 let KeyUserID = "USER_ID"
 let KeyListID = "LIST_ID"
+let LoaderSize:CGFloat = 20
 class ViewController: UIViewController {
 
     @IBOutlet weak var headingLabel:UILabel!
     @IBOutlet weak var addListButton:UIButton!
     @IBOutlet weak var joinListButton:UIButton!
     var joinListVC:SNJoinListViewController?
+    var loader:UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
     @IBAction func didTapAddListButton() {
         // Make create API call here
@@ -36,13 +38,27 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addListButton.addSubview(loader)
+        
+        loader.frame = CGRect(x: 2*PADDING_8, y: addListButton.frame.size.height/2 - LoaderSize/2, width: LoaderSize, height: LoaderSize)
+    }
+    
     func createList() {
+        loader.startAnimating()
+        self.addListButton.isUserInteractionEnabled = false
+        
         let userEndpoint:URLConvertible = "\(basePath)/user"
+        
+        // Need to figure this out
         let params:[String:Any] = ["name":"aamir","email":"aamir.anwar@gmail.com","password":"aamir"]
         
         Alamofire.request(userEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             // Check response and proceed further
-            
+            self.addListButton.isUserInteractionEnabled = true
+            self.loader.stopAnimating()
             guard response.result.isSuccess else {
                 print("Error")
                 return
@@ -72,6 +88,7 @@ extension ViewController {
             
         }
     }
+
 }
 
 
