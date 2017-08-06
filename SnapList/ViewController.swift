@@ -11,6 +11,9 @@ import Alamofire
 
 let kpadding13:CGFloat = 13.0
 let basePath = "https://snaplist-server.herokuapp.com/api"
+let NotificationUserLoggedSuccessfully = "userLoggedInSuccessfully"
+let KeyUserID = "USER_ID"
+let KeyListID = "LIST_ID"
 class ViewController: UIViewController {
 
     @IBOutlet weak var headingLabel:UILabel!
@@ -49,7 +52,23 @@ extension ViewController {
                 return
             }
             print("Registered with ID : \(userID)")
-            self.dismiss(animated: true, completion: nil)
+            UserDefaults.standard.set(userID, forKey: KeyUserID)
+            
+            let addListEndpoint = "\(basePath)/list"
+            Alamofire.request(addListEndpoint, method: .post, parameters: ["userId":userID, "title":"My List"], encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
+                guard response.result.isSuccess else {
+                    print("Create list API call failed")
+                    return
+                }
+                guard let value = response.result.value as? [String:Any], let userID = value["id"] as? String else {
+                    print("Bad Data")
+                    return
+                }
+                print(response.result.value!)
+                UserDefaults.standard.set(userID, forKey: KeyListID)
+                self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+            })
             
         }
     }

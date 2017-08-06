@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Alamofire
 let PADDING_8:CGFloat = 8
 let STATUS_BAR_HEIGHT:CGFloat = 22
+let KeyShareCode = "SHARE_CODE"
+let NotificationItemAdded = "NotificationItemAdded"
 class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     let cancelButton = UIButton(type: UIButtonType.system)
@@ -60,6 +63,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         
         createButton.backgroundColor = UIColor.black
         createButton.setTitleColor(UIColor.white, for: .normal)
+        createButton.addTarget(self, action: #selector(SNCreateItemViewController.createButtonTapped), for: .touchUpInside)
         
         cancelButton.backgroundColor = UIColor.black
         cancelButton.setTitleColor(UIColor.white, for: .normal)
@@ -109,10 +113,35 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
     func cancelButtonTapped() {
         self.descriptionTextView.resignFirstResponder()
         self.titleLabel.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func createButtonTapped() {
+        // Add item API call
+        let addItemEndpoint = "\(basePath)/list/\(UserDefaults.standard.value(forKey: KeyListID)!)/item"
+        let title:String = titleTextField.text!
+        let content:String = descriptionTextView.text!
+        
+        Alamofire.request(addItemEndpoint, method: .post, parameters:["title":title,"content":content], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                return
+            }
+            guard let value = response.result.value as? [String:Any], let shareCode = value["shareCode"] as? String else {
+                return
+            }
+            // Refresh list page. TODO - Add locally and then sync with server (Possible diffing? IGListKit use case)
+            UserDefaults.standard.setValue(shareCode, forKey: KeyShareCode)
+            
+            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: NotificationItemAdded), object: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

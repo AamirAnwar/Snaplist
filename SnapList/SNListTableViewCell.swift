@@ -25,13 +25,13 @@ class SNListTableViewCell: UITableViewCell {
     
     func createViews() {
         
-        titleLabel.text = "Title label one"
+        //titleLabel.text = "Title label one"
         titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
         
-        descriptionLabel.text = "Some really long description can really come in handy here! I mean come on just look at this"
+        //descriptionLabel.text = "Some really long description can really come in handy here! I mean come on just look at this"
         descriptionLabel.textColor = UIColor.black
         descriptionLabel.sizeToFit()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
