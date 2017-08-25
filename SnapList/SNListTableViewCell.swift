@@ -14,6 +14,7 @@ class SNListTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.selectionStyle = .none
         createViews()
     }
     
@@ -24,8 +25,6 @@ class SNListTableViewCell: UITableViewCell {
     }
     
     func createViews() {
-        
-        //titleLabel.text = "Title label one"
         titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
