@@ -61,6 +61,10 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return max(1, listItems.count)
     }
+
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = listTableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? SNListTableViewCell

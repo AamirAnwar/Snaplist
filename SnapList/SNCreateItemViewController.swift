@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 let PADDING_8:CGFloat = 8
 let STATUS_BAR_HEIGHT:CGFloat = 22
+let kButtonHeight:CGFloat = 50
 let KeyShareCode = "SHARE_CODE"
 let NotificationItemAdded = "NotificationItemAdded"
 class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
@@ -23,10 +24,10 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     let createButton = UIButton(type: UIButtonType.system)
     let containerView = UIView()
     let containerScrollView = UIScrollView()
-    
+    let titleFieldSeparator = UIView()
     
     func registerForNotification() {
-        NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willShowKeyboard) , name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willShowKeyboard(notification:)) , name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willHideKeyboard) , name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
     
@@ -50,16 +51,26 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         titleLabel.text = "Title"
         descriptionLabel.text = "Description"
         
+        createItemHeadingLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
+        titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
+        descriptionLabel.font = titleLabel.font
+        createButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
+        cancelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 13)
+        descriptionTextView.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
+        titleTextField.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
+        
         createItemHeadingLabel.sizeToFit()
         titleLabel.sizeToFit()
         descriptionLabel.sizeToFit()
         
-        descriptionTextView.layer.borderColor = UIColor.black.cgColor
+        descriptionTextView.layer.borderColor = UIColor.gray.cgColor
         descriptionTextView.layer.borderWidth = 1
         
-        titleTextField.layer.borderColor = UIColor.black.cgColor
-        titleTextField.layer.borderWidth = 1
+        
         titleTextField.delegate = self
+        
+        titleFieldSeparator.backgroundColor = UIColor.gray
+
         
         createButton.backgroundColor = UIColor.black
         createButton.setTitleColor(UIColor.white, for: .normal)
@@ -75,6 +86,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         containerView.addSubview(createItemHeadingLabel)
         containerView.addSubview(titleLabel)
         containerView.addSubview(titleTextField)
+        containerView.addSubview(titleFieldSeparator)
         containerView.addSubview(descriptionLabel)
         containerView.addSubview(descriptionTextView)
         containerView.addSubview(createButton)
@@ -87,26 +99,39 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         
         createItemHeadingLabel.frame = CGRect(x: containerView.center.x - (createItemHeadingLabel.frame.size.width)/2, y: cancelButton.frame.origin.y + cancelButton.frame.size.height + kpadding13, width: createItemHeadingLabel.frame.size.width, height: createItemHeadingLabel.frame.size.height)
         
-        titleLabel.frame = CGRect(x: containerView.center.x - (titleLabel.frame.size.width)/2, y: createItemHeadingLabel.frame.origin.y + createItemHeadingLabel.frame.size.height + kpadding13, width: titleLabel.frame.size.width, height: titleLabel.frame.size.height)
+        titleLabel.frame = CGRect(x: containerView.center.x - (titleLabel.frame.size.width)/2, y: createItemHeadingLabel.frame.origin.y + createItemHeadingLabel.frame.size.height + 3*kpadding13, width: titleLabel.frame.size.width, height: titleLabel.frame.size.height)
         
-        titleTextField.frame = CGRect(x: PADDING_8, y: titleLabel.frame.origin.y + titleLabel.frame.size.height + kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: 44)
+        titleTextField.frame = CGRect(x: PADDING_8, y: titleLabel.frame.origin.y + titleLabel.frame.size.height, width: containerView.frame.size.width - 2*PADDING_8, height: 40)
         
-        descriptionLabel.frame = CGRect(x: containerView.center.x - (descriptionLabel.frame.size.width)/2, y: titleTextField.frame.origin.y + titleTextField.frame.size.height + kpadding13, width: descriptionLabel.frame.size.width, height: descriptionLabel.frame.size.height)
+        titleFieldSeparator.frame = CGRect(x: titleTextField.frame.origin.x, y: titleTextField.frame.origin.y + titleTextField.frame.height - 5, width: titleTextField.frame.width, height: 1)
+        
+        descriptionLabel.frame = CGRect(x: containerView.center.x - (descriptionLabel.frame.size.width)/2, y: titleTextField.frame.origin.y + titleTextField.frame.size.height + 3*kpadding13 + 5, width: descriptionLabel.frame.size.width, height: descriptionLabel.frame.size.height)
         
         descriptionTextView.frame = CGRect(x: PADDING_8, y: descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height + kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: 132)
         
-        createButton.frame = CGRect(x: PADDING_8, y: descriptionTextView.frame.origin.y + descriptionTextView.frame.size.height + kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: createButton.intrinsicContentSize.height)
+        createButton.frame = CGRect(x: PADDING_8, y: descriptionTextView.frame.origin.y + descriptionTextView.frame.size.height + 2*kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: kButtonHeight)
         
 
     }
     
-    func willShowKeyboard() {
-        containerScrollView.setContentOffset(CGPoint(x:containerScrollView.contentOffset.x,y:40), animated: true)
+    func willShowKeyboard(notification:NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            UIView.animate(withDuration: 0.2, animations: {
+                self.containerScrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.height, 0)
+            }, completion: { (finished) in
+                self.containerScrollView.isScrollEnabled = true
+            })
+        }
         
     }
     
     func willHideKeyboard() {
-        containerScrollView.setContentOffset(CGPoint(x:containerScrollView.contentOffset.x,y:0), animated: true)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.containerScrollView.contentInset = .zero
+        }, completion: { (finished) in
+            self.containerScrollView.isScrollEnabled = false
+        })
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
