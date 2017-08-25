@@ -1,14 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QKn-AY-S2L">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="initialViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="SnapList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +28,262 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOb-gW-xdY">
+                                <rect key="frame" x="16" y="236" width="343" height="50"/>
+                                <color key="backgroundColor" red="0.25094899535179138" green="0.25099846720695496" blue="0.25094583630561829" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="cGz-bv-SCk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Create List">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapAddListButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="zZh-6u-izs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAC-gh-DSr">
+                                <rect key="frame" x="16" y="335" width="343" height="50"/>
+                                <color key="backgroundColor" red="0.25094899539999999" green="0.25099846720000002" blue="0.2509458363" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6Iy-oY-Wvf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Join Existing List">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapJoinListButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="tvn-GE-cjN"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snaplist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5MW-17-7qh">
+                                <rect key="frame" x="131.5" y="94" width="112" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MAC-gh-DSr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="EEf-ne-Jjj"/>
+                            <constraint firstItem="MAC-gh-DSr" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="RbG-Cs-egh"/>
+                            <constraint firstItem="xOb-gW-xdY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Xc0-YE-bg3"/>
+                            <constraint firstItem="5MW-17-7qh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cyR-Hm-l23"/>
+                            <constraint firstItem="5MW-17-7qh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="74" id="f62-mF-bMR"/>
+                            <constraint firstItem="MAC-gh-DSr" firstAttribute="top" secondItem="xOb-gW-xdY" secondAttribute="bottom" constant="49" id="fOM-kX-R0z"/>
+                            <constraint firstItem="xOb-gW-xdY" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="o3Y-64-wBk"/>
+                            <constraint firstItem="xOb-gW-xdY" firstAttribute="top" secondItem="5MW-17-7qh" secondAttribute="bottom" constant="106" id="oaX-so-4sP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addListButton" destination="xOb-gW-xdY" id="jDw-bt-HIo"/>
+                        <outlet property="headingLabel" destination="5MW-17-7qh" id="TqE-x0-vDl"/>
+                        <outlet property="joinListButton" destination="MAC-gh-DSr" id="BuR-oF-6ef"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="136.28185907046478"/>
+        </scene>
+        <!--Snaplist-->
+        <scene sceneID="inT-NJ-Vb7">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="no4-bl-phK" customClass="SNListViewController" customModule="SnapList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hKH-ez-g3a"/>
+                        <viewControllerLayoutGuide type="bottom" id="eNU-wW-zf9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mW9-Z4-AHI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vzo-WA-C5j">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="no4-bl-phK" id="ZsD-xW-qJr"/>
+                                    <outlet property="delegate" destination="no4-bl-phK" id="ZcG-jz-ZNs"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eNU-wW-zf9" firstAttribute="top" secondItem="vzo-WA-C5j" secondAttribute="bottom" id="A2k-6W-Vjl"/>
+                            <constraint firstItem="vzo-WA-C5j" firstAttribute="leading" secondItem="mW9-Z4-AHI" secondAttribute="leading" id="DFS-Tt-uif"/>
+                            <constraint firstItem="vzo-WA-C5j" firstAttribute="top" secondItem="hKH-ez-g3a" secondAttribute="bottom" id="KHu-oK-BLX"/>
+                            <constraint firstAttribute="trailing" secondItem="vzo-WA-C5j" secondAttribute="trailing" id="MmO-kB-Htb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Snaplist" id="38Z-46-3gP"/>
+                    <connections>
+                        <outlet property="listTableView" destination="vzo-WA-C5j" id="et7-dc-cSL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sbq-5Q-Hdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1903.2" y="135.38230884557723"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Caq-iG-tjF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QKn-AY-S2L" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="67R-qy-ggk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="no4-bl-phK" kind="relationship" relationship="rootViewController" id="Mtn-tW-vV7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="owu-NM-h3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="964" y="135.38230884557723"/>
+        </scene>
+        <!--Join List View Controller-->
+        <scene sceneID="rNl-X4-Bi0">
+            <objects>
+                <viewController storyboardIdentifier="SNJoinListViewController" id="iNn-KW-Pcl" customClass="SNJoinListViewController" customModule="SnapList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sWD-H0-Snu"/>
+                        <viewControllerLayoutGuide type="bottom" id="4zs-bC-LZf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="spw-y4-acE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlH-du-9bL">
+                                <rect key="frame" x="15" y="28" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="didTapCancelButton" destination="iNn-KW-Pcl" eventType="touchUpInside" id="Q61-es-hht"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join a List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1g-K8-219">
+                                <rect key="frame" x="128" y="87" width="118" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Eg-TL-eQe">
+                                <rect key="frame" x="166" y="148" width="42" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tp6-xT-8ZW">
+                                <rect key="frame" x="16" y="202" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hB5-6E-djS">
+                                <rect key="frame" x="16" y="318" width="343" height="32"/>
+                                <color key="backgroundColor" red="0.25094899539999999" green="0.25099846720000002" blue="0.2509458363" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Join">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapJoinButton" destination="iNn-KW-Pcl" eventType="touchUpInside" id="u8f-v5-cMB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="F1g-K8-219" firstAttribute="centerX" secondItem="spw-y4-acE" secondAttribute="centerX" id="1DS-Vt-CQU"/>
+                            <constraint firstItem="hB5-6E-djS" firstAttribute="centerX" secondItem="tp6-xT-8ZW" secondAttribute="centerX" id="6bb-jd-884"/>
+                            <constraint firstItem="F1g-K8-219" firstAttribute="top" secondItem="sWD-H0-Snu" secondAttribute="bottom" constant="67" id="9aZ-ro-LzD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hB5-6E-djS" secondAttribute="trailing" id="IDD-bL-daA"/>
+                            <constraint firstItem="tp6-xT-8ZW" firstAttribute="leading" secondItem="spw-y4-acE" secondAttribute="leadingMargin" id="IIt-Rm-ncg"/>
+                            <constraint firstItem="hB5-6E-djS" firstAttribute="leading" secondItem="spw-y4-acE" secondAttribute="leadingMargin" id="Qr6-KR-05Q"/>
+                            <constraint firstItem="tp6-xT-8ZW" firstAttribute="centerX" secondItem="1Eg-TL-eQe" secondAttribute="centerX" id="WAE-J9-YPr"/>
+                            <constraint firstItem="tp6-xT-8ZW" firstAttribute="top" secondItem="1Eg-TL-eQe" secondAttribute="bottom" constant="34" id="lG6-xN-73M"/>
+                            <constraint firstItem="hB5-6E-djS" firstAttribute="top" secondItem="tp6-xT-8ZW" secondAttribute="bottom" constant="86" id="nLB-zX-MiT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tp6-xT-8ZW" secondAttribute="trailing" id="pTC-hM-X4y"/>
+                            <constraint firstItem="1Eg-TL-eQe" firstAttribute="top" secondItem="F1g-K8-219" secondAttribute="bottom" constant="32" id="vt0-o5-SrO"/>
+                            <constraint firstItem="1Eg-TL-eQe" firstAttribute="centerX" secondItem="F1g-K8-219" secondAttribute="centerX" id="wgd-ci-SYu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="xlH-du-9bL" id="Kl3-au-dHy"/>
+                        <outlet property="codeTextField" destination="tp6-xT-8ZW" id="qD2-dW-OW8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mEh-jT-NNr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="921" y="889"/>
+        </scene>
+        <!--Invite View Controller-->
+        <scene sceneID="r1Q-Qc-Kt1">
+            <objects>
+                <viewController storyboardIdentifier="SNInviteViewController" id="gkF-F5-RYA" customClass="SNInviteViewController" customModule="SnapList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jse-Ch-5t9"/>
+                        <viewControllerLayoutGuide type="bottom" id="LYJ-Rc-en7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="p33-g7-ki1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUc-cv-yOO">
+                                <rect key="frame" x="15" y="28" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Cancel"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite people to your list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwZ-t8-2GS">
+                                <rect key="frame" x="50.5" y="87" width="274.5" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite others to manage your list and collaborate on tasks  together" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COs-1l-PZ5">
+                                <rect key="frame" x="8" y="148" width="359" height="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharing Code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXd-aJ-d4X">
+                                <rect key="frame" x="8" y="221" width="359" height="25.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this code with anyone to work together on a list" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyo-dS-YfC">
+                                <rect key="frame" x="8" y="291" width="359" height="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HwZ-t8-2GS" firstAttribute="centerX" secondItem="p33-g7-ki1" secondAttribute="centerX" id="6jM-2q-j9g"/>
+                            <constraint firstAttribute="trailing" secondItem="RXd-aJ-d4X" secondAttribute="trailing" constant="8" id="FsN-Um-dSz"/>
+                            <constraint firstItem="RXd-aJ-d4X" firstAttribute="leading" secondItem="p33-g7-ki1" secondAttribute="leading" constant="8" id="TXc-Ee-FM4"/>
+                            <constraint firstItem="cyo-dS-YfC" firstAttribute="top" secondItem="RXd-aJ-d4X" secondAttribute="bottom" constant="44.5" id="WBc-mV-UTA"/>
+                            <constraint firstItem="COs-1l-PZ5" firstAttribute="top" secondItem="HwZ-t8-2GS" secondAttribute="bottom" constant="32" id="aGv-bx-MhF"/>
+                            <constraint firstItem="cyo-dS-YfC" firstAttribute="leading" secondItem="p33-g7-ki1" secondAttribute="leading" constant="8" id="dre-cB-QQm"/>
+                            <constraint firstAttribute="trailing" secondItem="COs-1l-PZ5" secondAttribute="trailing" constant="8" id="eNM-CW-CTx"/>
+                            <constraint firstAttribute="trailing" secondItem="cyo-dS-YfC" secondAttribute="trailing" constant="8" id="mtC-GD-RRc"/>
+                            <constraint firstItem="RXd-aJ-d4X" firstAttribute="top" secondItem="COs-1l-PZ5" secondAttribute="bottom" constant="33" id="oXd-fC-iMg"/>
+                            <constraint firstItem="COs-1l-PZ5" firstAttribute="centerX" secondItem="HwZ-t8-2GS" secondAttribute="centerX" id="pvY-Ae-eMr"/>
+                            <constraint firstItem="COs-1l-PZ5" firstAttribute="leading" secondItem="p33-g7-ki1" secondAttribute="leading" constant="8" id="w7a-qq-yvy"/>
+                            <constraint firstItem="HwZ-t8-2GS" firstAttribute="top" secondItem="Jse-Ch-5t9" secondAttribute="bottom" constant="67" id="wNR-3w-RZb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="shareCodeLabel" destination="RXd-aJ-d4X" id="Bux-dN-tmI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iBc-G1-BFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1782" y="888"/>
         </scene>
     </scenes>
 </document>
