@@ -51,13 +51,13 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         titleLabel.text = "Title"
         descriptionLabel.text = "Description"
         
-        createItemHeadingLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
-        titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
+        createItemHeadingLabel.font = SNFHeadlineBold
+        titleLabel.font = SNFTitleBold
         descriptionLabel.font = titleLabel.font
-        createButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
-        cancelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 13)
-        descriptionTextView.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
-        titleTextField.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
+        createButton.titleLabel?.font = SNFTitleBold
+        cancelButton.titleLabel?.font = SNFButtonTitleMedium
+        descriptionTextView.font = SNFBodyMedium
+        titleTextField.font = SNFBodyMedium
         
         createItemHeadingLabel.sizeToFit()
         titleLabel.sizeToFit()
