@@ -21,7 +21,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     let titleTextField = UITextField()
     let descriptionLabel = UILabel()
     let descriptionTextView = UITextView()
-    let createButton = UIButton(type: UIButtonType.system)
+    let createButton = SNRectButton(type: UIButtonType.system)
     let containerView = UIView()
     let containerScrollView = UIScrollView()
     let titleFieldSeparator = UIView()
@@ -147,8 +147,9 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         let addItemEndpoint = "\(basePath)/list/\(UserDefaults.standard.value(forKey: KeyListID)!)/item"
         let title:String = titleTextField.text!
         let content:String = descriptionTextView.text!
-        
+        createButton.showLoader()
         Alamofire.request(addItemEndpoint, method: .post, parameters:["title":title,"content":content], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            self.createButton.hideLoader()
             guard response.result.isSuccess else {
                 return
             }

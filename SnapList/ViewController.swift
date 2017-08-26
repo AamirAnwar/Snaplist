@@ -14,7 +14,6 @@ let basePath = "https://snaplist-server.herokuapp.com/api"
 let NotificationUserLoggedSuccessfully = "userLoggedInSuccessfully"
 let KeyUserID = "USER_ID"
 let KeyListID = "LIST_ID"
-let LoaderSize:CGFloat = 20
 class ViewController: UIViewController {
 
     @IBOutlet weak var headingLabel:UILabel!
@@ -42,7 +41,6 @@ extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addListButton.addSubview(loader)
-        
         loader.frame = CGRect(x: 2*PADDING_8, y: addListButton.frame.size.height/2 - LoaderSize/2, width: LoaderSize, height: LoaderSize)
     }
     

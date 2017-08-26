@@ -93,6 +93,9 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
         return cell
         
     }
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     func toggleVisibility() {
         
