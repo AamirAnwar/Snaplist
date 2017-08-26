@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-
+let SNLightGray = UIColor.init(hex: 0xF1F1F1)
 class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SNSideMenuViewDelegate {
 
     @IBOutlet weak var listTableView: UITableView!
@@ -28,7 +28,9 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.view.addSubview(sideMenuView)
         listTableView.rowHeight = UITableViewAutomaticDimension
         listTableView.estimatedRowHeight = 44
+        listTableView.backgroundColor = SNLightGray
         listTableView.tableFooterView = UIView()
+        listTableView.separatorStyle = .none
         listTableView.register(SNListTableViewCell.self, forCellReuseIdentifier: "listcell")
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)

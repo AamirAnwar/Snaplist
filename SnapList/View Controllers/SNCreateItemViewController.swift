@@ -21,7 +21,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     let titleTextField = UITextField()
     let descriptionLabel = UILabel()
     let descriptionTextView = UITextView()
-    let createButton = UIButton(type: UIButtonType.system)
+    let createButton = SNRectButton(type: UIButtonType.system)
     let containerView = UIView()
     let containerScrollView = UIScrollView()
     let titleFieldSeparator = UIView()
@@ -51,13 +51,15 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         titleLabel.text = "Title"
         descriptionLabel.text = "Description"
         
-        createItemHeadingLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
-        titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
+        createItemHeadingLabel.font = SNFHeadlineBold
+        titleLabel.font = SNFTitleBold
         descriptionLabel.font = titleLabel.font
-        createButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
-        cancelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 13)
-        descriptionTextView.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
-        titleTextField.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
+        createButton.titleLabel?.font = SNFTitleBold
+        cancelButton.titleLabel?.font = SNFButtonTitleMedium
+        descriptionTextView.font = SNFBodyMedium
+        titleTextField.font = SNFBodyMedium
+        titleTextField.textAlignment = .center
+        descriptionTextView.textAlignment = .center
         
         createItemHeadingLabel.sizeToFit()
         titleLabel.sizeToFit()
@@ -111,27 +113,21 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         
         createButton.frame = CGRect(x: PADDING_8, y: descriptionTextView.frame.origin.y + descriptionTextView.frame.size.height + 2*kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: kButtonHeight)
         
+        
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapBackgroundView))
+        containerView.addGestureRecognizer(tapGesture)
+        
+        
 
     }
     
     func willShowKeyboard(notification:NSNotification) {
-        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRect = keyboardFrame.cgRectValue
-            UIView.animate(withDuration: 0.2, animations: {
-                self.containerScrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardRect.height, 0)
-            }, completion: { (finished) in
-                self.containerScrollView.isScrollEnabled = true
-            })
-        }
+        enableScroll(notification: notification)
         
     }
     
     func willHideKeyboard() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.containerScrollView.contentInset = .zero
-        }, completion: { (finished) in
-            self.containerScrollView.isScrollEnabled = false
-        })
+        disableScroll()
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -153,8 +149,9 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         let addItemEndpoint = "\(basePath)/list/\(UserDefaults.standard.value(forKey: KeyListID)!)/item"
         let title:String = titleTextField.text!
         let content:String = descriptionTextView.text!
-        
+        createButton.showLoader()
         Alamofire.request(addItemEndpoint, method: .post, parameters:["title":title,"content":content], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            self.createButton.hideLoader()
             guard response.result.isSuccess else {
                 return
             }
@@ -167,6 +164,39 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
             NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: NotificationItemAdded), object: nil)
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func didTapBackgroundView() {
+        containerView.endEditing(true)
+        disableScroll()
+    }
+    
+    func enableScroll(notification:NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            
+            let buttonVerticalInfo = (y:createButton.frame.origin.y, height:createButton.frame.height)
+            let viewVerticalInfo = (y:containerView.frame.origin.y, height:containerView.frame.height)
+            let offsetAdustment = (buttonVerticalInfo.y + buttonVerticalInfo.height) - (viewVerticalInfo.height - keyboardHeight)
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.containerScrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight, 0)
+                if offsetAdustment > 0.0 {
+                 self.containerScrollView.setContentOffset(CGPoint.init(x: self.containerScrollView.contentOffset.x, y: offsetAdustment + kButtonHeight/2), animated: true)
+                }
+            }, completion: { (finished) in
+                self.containerScrollView.isScrollEnabled = true
+            })
+        }
+        
+    }
+    
+    func disableScroll() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.containerScrollView.contentInset = .zero
+        }, completion: { (finished) in
+            self.containerScrollView.isScrollEnabled = false
+        })
     }
     
 }
