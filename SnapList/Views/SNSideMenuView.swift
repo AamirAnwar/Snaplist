@@ -41,9 +41,8 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
         containerView.backgroundColor = UIColor.white
         self.addSubview(containerView)
         
-        
-        
         headingLabel.text = "Snaplist"
+        headingLabel.font = SNFHeadlineBold
         headingLabel.sizeToFit()
         headingLabel.frame = CGRect(x: containerView.center.x - headingLabel.frame.size.width/2 , y: containerView.frame.origin.y + 2*kpadding13 + STATUS_BAR_HEIGHT, width: headingLabel.frame.size.width, height: headingLabel.frame.size.height)
         headingLabel.textColor = UIColor.black
@@ -90,11 +89,9 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.textColor = UIColor.red.withAlphaComponent(0.8)
         }
         cell.textLabel?.textAlignment = .center
+        cell.selectionStyle = .none
         return cell
         
-    }
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
     }
     
     func toggleVisibility() {
