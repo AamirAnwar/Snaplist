@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SNJoinListViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
@@ -14,6 +15,7 @@ class SNJoinListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        cancelButton.layer.cornerRadius = 4
 
     }
     
@@ -23,5 +25,18 @@ class SNJoinListViewController: UIViewController {
     
     @IBAction func didTapJoinButton() {
         // Make API to join existing list
+        guard var listID = codeTextField.text else {
+            return
+        }
+        listID = listID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let joinListEndpoint = "\(basePath)/list/\(listID)/user"
+        Alamofire.request(joinListEndpoint, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseString { (response) in
+            guard response.result.isSuccess else {
+                return
+            }
+            
+            // Dismiss both presented view controller and update list view here
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+        }
     }
 }
