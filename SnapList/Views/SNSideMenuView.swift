@@ -90,11 +90,9 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.textColor = UIColor.red.withAlphaComponent(0.8)
         }
         cell.textLabel?.textAlignment = .center
+        cell.selectionStyle = .none
         return cell
         
-    }
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
     }
     
     func toggleVisibility() {

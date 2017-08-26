@@ -97,9 +97,17 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let alertController = UIAlertController.init(title: "Delete List", message: "Are you sure you want to delete this list", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction.init(title: "Yes", style: .destructive, handler: { (action) in
-            self.navigationController?.present(UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "initialViewController"), animated: true, completion: nil)
+            if let listID = UserDefaults.standard.object(forKey: KeyListID), let userID = UserDefaults.standard.object(forKey: KeyUserID) {
+                let deleteListEndPoint = "\(basePath)/list/\(listID)/user/\(userID)"
+                Alamofire.request(deleteListEndPoint, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response) in
+                    guard response.result.isSuccess else {
+                        return
+                    }
+                    self.navigationController?.present(UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "initialViewController"), animated: true, completion: nil)
+                    
+                })
+            }
         }))
-        
         
         alertController.addAction(UIAlertAction.init(title: "No", style: .default, handler: { (action) in
            alertController.dismiss(animated: true, completion: nil)

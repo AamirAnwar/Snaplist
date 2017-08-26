@@ -62,6 +62,8 @@ extension ViewController {
                 return
             }
             guard let value = response.result.value as? [String:Any], let userID = value["id"] as? String else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+                self.dismiss(animated: true, completion: nil)
                 print("Bad Data")
                 return
             }
