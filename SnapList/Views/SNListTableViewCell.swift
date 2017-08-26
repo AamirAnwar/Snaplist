@@ -34,13 +34,15 @@ class SNListTableViewCell: UITableViewCell {
         
         
         titleLabel.textColor = UIColor.black
-        titleLabel.font = SNFTitleBold
+        titleLabel.font = SNFTitleMedium
         titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 2
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
         
         //descriptionLabel.text = "Some really long description can really come in handy here! I mean come on just look at this"
         descriptionLabel.textColor = UIColor.black
+        descriptionLabel.textAlignment = .center
         descriptionLabel.font = SNFParagraph
         descriptionLabel.sizeToFit()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -57,14 +59,14 @@ class SNListTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant:8),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:-8),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant:kpadding13),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:-kpadding13),
             titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -20)
             ])
         
         NSLayoutConstraint.activate([
-            descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant:8),
-            descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:-8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant:kpadding13),
+            descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant:-kpadding13),
             descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant:-20)
             ])
     }

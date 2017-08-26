@@ -80,8 +80,8 @@ extension ViewController {
                 }
                 print(response.result.value!)
                 UserDefaults.standard.set(userID, forKey: KeyListID)
-                self.dismiss(animated: true, completion: nil)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+                self.dismiss(animated: true, completion: nil)
             })
             
         }

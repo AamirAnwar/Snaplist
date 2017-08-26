@@ -58,6 +58,8 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         cancelButton.titleLabel?.font = SNFButtonTitleMedium
         descriptionTextView.font = SNFBodyMedium
         titleTextField.font = SNFBodyMedium
+        titleTextField.textAlignment = .center
+        descriptionTextView.textAlignment = .center
         
         createItemHeadingLabel.sizeToFit()
         titleLabel.sizeToFit()
