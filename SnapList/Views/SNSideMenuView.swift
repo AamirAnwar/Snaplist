@@ -41,9 +41,8 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
         containerView.backgroundColor = UIColor.white
         self.addSubview(containerView)
         
-        
-        
         headingLabel.text = "Snaplist"
+        headingLabel.font = SNFHeadlineBold
         headingLabel.sizeToFit()
         headingLabel.frame = CGRect(x: containerView.center.x - headingLabel.frame.size.width/2 , y: containerView.frame.origin.y + 2*kpadding13 + STATUS_BAR_HEIGHT, width: headingLabel.frame.size.width, height: headingLabel.frame.size.height)
         headingLabel.textColor = UIColor.black
@@ -90,6 +89,7 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
             cell.textLabel?.textColor = UIColor.red.withAlphaComponent(0.8)
         }
         cell.textLabel?.textAlignment = .center
+        cell.selectionStyle = .none
         return cell
         
     }
@@ -131,4 +131,21 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
     }
     
 
+}
+
+extension UIColor {
+    convenience init(red:Int, green:Int, blue:Int) {
+        guard (red >= 0 && red <= 255) && (green >= 0 && green <= 255) && (blue >= 0 && blue <= 255) else {
+            self.init()
+            return
+        }
+        let redComponent = CGFloat.init(red)/255.0
+        let greenComponent = CGFloat.init(green)/255.0
+        let blueComponent = CGFloat.init(blue)/255.0
+        self.init(red: redComponent, green: greenComponent, blue: blueComponent, alpha: 1.0)
+    }
+    
+    convenience init(hex:Int) {
+        self.init(red: (hex >> 16) & 0xFF, green: (hex >> 8) & 0xFF, blue: (hex) & 0xFF)
+    }
 }
