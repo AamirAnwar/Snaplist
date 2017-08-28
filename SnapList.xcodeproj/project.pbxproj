@@ -112,9 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				4387568E1EBFF915007F6F0C /* AppDelegate.swift */,
-				43825E841F519BEB00439557 /* SNFont.swift */,
-				43EA16821F54428500E54A95 /* SNConstants.swift */,
-				43EA16841F54428C00E54A95 /* SNColors.swift */,
+				43EA16861F54441900E54A95 /* Commons */,
 				43825E7F1F519B5200439557 /* View Controllers */,
 				43825E801F519B5E00439557 /* Views */,
 				438756921EBFF915007F6F0C /* Main.storyboard */,
@@ -123,6 +121,16 @@
 				4387569A1EBFF915007F6F0C /* Info.plist */,
 			);
 			path = SnapList;
+			sourceTree = "<group>";
+		};
+		43EA16861F54441900E54A95 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				43825E841F519BEB00439557 /* SNFont.swift */,
+				43EA16821F54428500E54A95 /* SNConstants.swift */,
+				43EA16841F54428C00E54A95 /* SNColors.swift */,
+			);
+			path = Commons;
 			sourceTree = "<group>";
 		};
 		DF7022B957EFF3D2D9E0932B /* Pods */ = {
