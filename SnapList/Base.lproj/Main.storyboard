@@ -17,10 +17,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Initial View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="initialViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="SnapList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="initialViewController" id="BYZ-38-t0r" customClass="SNInitialViewController" customModule="SnapList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -195,7 +195,7 @@
                                     <constraint firstAttribute="height" constant="1" id="yqa-6S-egv"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hB5-6E-djS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hB5-6E-djS">
                                 <rect key="frame" x="16" y="267" width="343" height="50"/>
                                 <color key="backgroundColor" red="0.25094899539999999" green="0.25099846720000002" blue="0.2509458363" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -213,7 +213,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="F1g-K8-219" firstAttribute="centerX" secondItem="spw-y4-acE" secondAttribute="centerX" id="1DS-Vt-CQU"/>
-                            <constraint firstItem="hB5-6E-djS" firstAttribute="centerX" secondItem="tp6-xT-8ZW" secondAttribute="centerX" id="6bb-jd-884"/>
                             <constraint firstItem="F1g-K8-219" firstAttribute="top" secondItem="sWD-H0-Snu" secondAttribute="bottom" constant="67" id="9aZ-ro-LzD"/>
                             <constraint firstItem="yZi-xA-zAX" firstAttribute="bottom" secondItem="tp6-xT-8ZW" secondAttribute="bottom" constant="-5" id="Far-E1-ANt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hB5-6E-djS" secondAttribute="trailing" id="IDD-bL-daA"/>
@@ -292,7 +291,6 @@
                             <constraint firstAttribute="trailing" secondItem="COs-1l-PZ5" secondAttribute="trailing" constant="8" id="eNM-CW-CTx"/>
                             <constraint firstAttribute="trailing" secondItem="cyo-dS-YfC" secondAttribute="trailing" constant="8" id="mtC-GD-RRc"/>
                             <constraint firstItem="RXd-aJ-d4X" firstAttribute="top" secondItem="COs-1l-PZ5" secondAttribute="bottom" constant="33" id="oXd-fC-iMg"/>
-                            <constraint firstItem="COs-1l-PZ5" firstAttribute="centerX" secondItem="HwZ-t8-2GS" secondAttribute="centerX" id="pvY-Ae-eMr"/>
                             <constraint firstItem="COs-1l-PZ5" firstAttribute="leading" secondItem="p33-g7-ki1" secondAttribute="leading" constant="8" id="w7a-qq-yvy"/>
                             <constraint firstItem="HwZ-t8-2GS" firstAttribute="top" secondItem="Jse-Ch-5t9" secondAttribute="bottom" constant="67" id="wNR-3w-RZb"/>
                         </constraints>

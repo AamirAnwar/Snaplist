@@ -8,11 +8,7 @@
 
 import UIKit
 import Alamofire
-let PADDING_8:CGFloat = 8
-let STATUS_BAR_HEIGHT:CGFloat = 22
-let kButtonHeight:CGFloat = 50
-let KeyShareCode = "SHARE_CODE"
-let NotificationItemAdded = "NotificationItemAdded"
+
 class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     let cancelButton = UIButton(type: UIButtonType.system)
@@ -26,6 +22,17 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     let containerScrollView = UIScrollView()
     let titleFieldSeparator = UIView()
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerForNotification()
+        view.backgroundColor = UIColor.white
+        createViews()
+        layoutViews()
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapBackgroundView))
+        containerView.addGestureRecognizer(tapGesture)
+    }
+    
     func registerForNotification() {
         NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willShowKeyboard(notification:)) , name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(SNCreateItemViewController.willHideKeyboard) , name: Notification.Name.UIKeyboardWillHide, object: nil)
@@ -38,19 +45,17 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         containerScrollView.isScrollEnabled = false
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        registerForNotification()
-        view.backgroundColor = UIColor.white
+    func createViews() {
         createContainerView()
+        
+        // Set titles
         cancelButton.setTitle("Cancel", for: .normal)
         createButton.setTitle("Create", for: .normal)
-        
         createItemHeadingLabel.text = "Create Item"
         titleLabel.text = "Title"
         descriptionLabel.text = "Description"
         
+        // Setup fonts
         createItemHeadingLabel.font = SNFHeadlineBold
         titleLabel.font = SNFTitleBold
         descriptionLabel.font = titleLabel.font
@@ -58,32 +63,36 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         cancelButton.titleLabel?.font = SNFButtonTitleMedium
         descriptionTextView.font = SNFBodyMedium
         titleTextField.font = SNFBodyMedium
+        
+        // Set Text Alignment
         titleTextField.textAlignment = .center
         descriptionTextView.textAlignment = .center
         
+        // Update frames for labels
         createItemHeadingLabel.sizeToFit()
         titleLabel.sizeToFit()
         descriptionLabel.sizeToFit()
         
+        // Update borders for textview
         descriptionTextView.layer.borderColor = UIColor.gray.cgColor
         descriptionTextView.layer.borderWidth = 1
         
-        
+        // Text field delegate + Line view color
         titleTextField.delegate = self
-        
         titleFieldSeparator.backgroundColor = UIColor.gray
-
         
+        // Create button UI + Target
         createButton.backgroundColor = UIColor.black
         createButton.setTitleColor(UIColor.white, for: .normal)
         createButton.addTarget(self, action: #selector(SNCreateItemViewController.createButtonTapped), for: .touchUpInside)
         
+        // Cancel button UI + Target
         cancelButton.backgroundColor = UIColor.black
         cancelButton.setTitleColor(UIColor.white, for: .normal)
         cancelButton.layer.cornerRadius = 4
         cancelButton.addTarget(self, action: #selector(SNCreateItemViewController.cancelButtonTapped), for: .touchUpInside)
-
-        view.addSubview(cancelButton)
+        
+        // Add views to container view
         containerView.addSubview(createButton)
         containerView.addSubview(createItemHeadingLabel)
         containerView.addSubview(titleLabel)
@@ -92,11 +101,15 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         containerView.addSubview(descriptionLabel)
         containerView.addSubview(descriptionTextView)
         containerView.addSubview(createButton)
+        
+        // Setup Scroll View based on container view
         containerScrollView.addSubview(containerView)
         containerScrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height)
         view.addSubview(containerScrollView)
-        view.bringSubview(toFront: cancelButton)
-        
+        view.addSubview(cancelButton)
+    }
+    
+    func layoutViews() {
         cancelButton.frame = CGRect(x: PADDING_8, y: PADDING_8 + STATUS_BAR_HEIGHT, width: cancelButton.intrinsicContentSize.width + 2*PADDING_8, height: cancelButton.intrinsicContentSize.height)
         
         createItemHeadingLabel.frame = CGRect(x: containerView.center.x - (createItemHeadingLabel.frame.size.width)/2, y: cancelButton.frame.origin.y + cancelButton.frame.size.height + kpadding13, width: createItemHeadingLabel.frame.size.width, height: createItemHeadingLabel.frame.size.height)
@@ -112,13 +125,6 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         descriptionTextView.frame = CGRect(x: PADDING_8, y: descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height + kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: 132)
         
         createButton.frame = CGRect(x: PADDING_8, y: descriptionTextView.frame.origin.y + descriptionTextView.frame.size.height + 2*kpadding13, width: containerView.frame.size.width - 2*PADDING_8, height: kButtonHeight)
-        
-        
-        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(didTapBackgroundView))
-        containerView.addGestureRecognizer(tapGesture)
-        
-        
-
     }
     
     func willShowKeyboard(notification:NSNotification) {
@@ -166,11 +172,13 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: Dismiss Keyboard Gesture
     func didTapBackgroundView() {
         containerView.endEditing(true)
         disableScroll()
     }
     
+    // MARK: Scrolling Helpers
     func enableScroll(notification:NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
