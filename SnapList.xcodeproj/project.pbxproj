@@ -12,7 +12,7 @@
 		4302D7D01F1507340056C4DE /* SNSideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302D7CF1F1507340056C4DE /* SNSideMenuView.swift */; };
 		43825E851F519BEB00439557 /* SNFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43825E841F519BEB00439557 /* SNFont.swift */; };
 		4387568F1EBFF915007F6F0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387568E1EBFF915007F6F0C /* AppDelegate.swift */; };
-		438756911EBFF915007F6F0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438756901EBFF915007F6F0C /* ViewController.swift */; };
+		438756911EBFF915007F6F0C /* SNInitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438756901EBFF915007F6F0C /* SNInitialViewController.swift */; };
 		438756941EBFF915007F6F0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438756921EBFF915007F6F0C /* Main.storyboard */; };
 		438756961EBFF915007F6F0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438756951EBFF915007F6F0C /* Assets.xcassets */; };
 		438756991EBFF915007F6F0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438756971EBFF915007F6F0C /* LaunchScreen.storyboard */; };
@@ -32,7 +32,7 @@
 		43825E841F519BEB00439557 /* SNFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNFont.swift; sourceTree = "<group>"; };
 		4387568B1EBFF915007F6F0C /* SnapList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4387568E1EBFF915007F6F0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		438756901EBFF915007F6F0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		438756901EBFF915007F6F0C /* SNInitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNInitialViewController.swift; sourceTree = "<group>"; };
 		438756931EBFF915007F6F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		438756951EBFF915007F6F0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		438756981EBFF915007F6F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		43825E7F1F519B5200439557 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				438756901EBFF915007F6F0C /* ViewController.swift */,
+				438756901EBFF915007F6F0C /* SNInitialViewController.swift */,
 				4302D7CD1F1505970056C4DE /* SNInviteViewController.swift */,
 				43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */,
 				4302D7CB1F14ECB80056C4DE /* SNJoinListViewController.swift */,
@@ -257,7 +257,7 @@
 				4302D7CE1F1505970056C4DE /* SNInviteViewController.swift in Sources */,
 				43825E851F519BEB00439557 /* SNFont.swift in Sources */,
 				4302D7CC1F14ECB80056C4DE /* SNJoinListViewController.swift in Sources */,
-				438756911EBFF915007F6F0C /* ViewController.swift in Sources */,
+				438756911EBFF915007F6F0C /* SNInitialViewController.swift in Sources */,
 				43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */,
 				4302D7D01F1507340056C4DE /* SNSideMenuView.swift in Sources */,
 				4387568F1EBFF915007F6F0C /* AppDelegate.swift in Sources */,

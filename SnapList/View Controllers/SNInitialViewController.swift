@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SNInitialViewController.swift
 //  SnapList
 //
 //  Created by Aamir  on 08/05/17.
@@ -14,7 +14,8 @@ let basePath = "https://snaplist-server.herokuapp.com/api"
 let NotificationUserLoggedSuccessfully = "userLoggedInSuccessfully"
 let KeyUserID = "USER_ID"
 let KeyListID = "LIST_ID"
-class ViewController: UIViewController {
+
+class SNInitialViewController: UIViewController {
 
     @IBOutlet weak var headingLabel:UILabel!
     @IBOutlet weak var addListButton:UIButton!
@@ -34,10 +35,7 @@ class ViewController: UIViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
-}
 
-extension ViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addListButton.addSubview(loader)

@@ -36,7 +36,7 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "initialViewController")
         
-        if let vc = initialViewController as? ViewController {
+        if let vc = initialViewController as? SNInitialViewController {
             self.present(vc, animated: true, completion: nil)
         }
         
