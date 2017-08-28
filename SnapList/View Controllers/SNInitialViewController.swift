@@ -9,12 +9,6 @@
 import UIKit
 import Alamofire
 
-let kpadding13:CGFloat = 13.0
-let basePath = "https://snaplist-server.herokuapp.com/api"
-let NotificationUserLoggedSuccessfully = "userLoggedInSuccessfully"
-let KeyUserID = "USER_ID"
-let KeyListID = "LIST_ID"
-
 class SNInitialViewController: UIViewController {
 
     @IBOutlet weak var headingLabel:UILabel!
@@ -45,7 +39,6 @@ class SNInitialViewController: UIViewController {
     func createList() {
         loader.startAnimating()
         self.addListButton.isUserInteractionEnabled = false
-        
         let userEndpoint:URLConvertible = "\(basePath)/user"
         
         // Need to figure this out
@@ -60,7 +53,7 @@ class SNInitialViewController: UIViewController {
                 return
             }
             guard let value = response.result.value as? [String:Any], let userID = value["id"] as? String else {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
                 print("Bad Data")
                 return
             }

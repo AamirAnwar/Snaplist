@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-let SNLightGray = UIColor.init(hex: 0xF1F1F1)
+
 class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SNSideMenuViewDelegate {
 
     @IBOutlet weak var listTableView: UITableView!
@@ -33,16 +33,23 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         listTableView.separatorStyle = .none
         listTableView.register(SNListTableViewCell.self, forCellReuseIdentifier: "listcell")
         
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "initialViewController")
-        
-        if let vc = initialViewController as? SNInitialViewController {
-            self.present(vc, animated: true, completion: nil)
-        }
         
         self.navigationItem.setRightBarButton(UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(SNListViewController.didTapAddItem)), animated: true)
         self.navigationItem.setLeftBarButton(UIBarButtonItem.init(title: "Menu", style: .plain, target: self, action: #selector(SNListViewController.didTapMenuButton)), animated: true)
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        presentInitialViewController()
+    }
+    
+    func presentInitialViewController() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "initialViewController")
+        if let vc = initialViewController as? SNInitialViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func didTapMenuButton() {

@@ -8,11 +8,7 @@
 
 import UIKit
 import Alamofire
-let PADDING_8:CGFloat = 8
-let STATUS_BAR_HEIGHT:CGFloat = 22
-let kButtonHeight:CGFloat = 50
-let KeyShareCode = "SHARE_CODE"
-let NotificationItemAdded = "NotificationItemAdded"
+
 class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     let cancelButton = UIButton(type: UIButtonType.system)

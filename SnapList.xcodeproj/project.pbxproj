@@ -20,6 +20,8 @@
 		43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */; };
 		43A2943B1F0EC74B0036CDA6 /* SNListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */; };
 		43A2943D1F0ED6350036CDA6 /* SNCreateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */; };
+		43EA16831F54428500E54A95 /* SNConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EA16821F54428500E54A95 /* SNConstants.swift */; };
+		43EA16851F54428C00E54A95 /* SNColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EA16841F54428C00E54A95 /* SNColors.swift */; };
 		839B88C2E62844611721574E /* Pods_SnapList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28497F6697098397F89EC2AE /* Pods_SnapList.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNListViewController.swift; sourceTree = "<group>"; };
 		43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNListTableViewCell.swift; sourceTree = "<group>"; };
 		43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNCreateItemViewController.swift; sourceTree = "<group>"; };
+		43EA16821F54428500E54A95 /* SNConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNConstants.swift; sourceTree = "<group>"; };
+		43EA16841F54428C00E54A95 /* SNColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNColors.swift; sourceTree = "<group>"; };
 		884F902A3624F51B8BD467F0 /* Pods-SnapList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnapList/Pods-SnapList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +113,8 @@
 			children = (
 				4387568E1EBFF915007F6F0C /* AppDelegate.swift */,
 				43825E841F519BEB00439557 /* SNFont.swift */,
+				43EA16821F54428500E54A95 /* SNConstants.swift */,
+				43EA16841F54428C00E54A95 /* SNColors.swift */,
 				43825E7F1F519B5200439557 /* View Controllers */,
 				43825E801F519B5E00439557 /* Views */,
 				438756921EBFF915007F6F0C /* Main.storyboard */,
@@ -258,7 +264,9 @@
 				43825E851F519BEB00439557 /* SNFont.swift in Sources */,
 				4302D7CC1F14ECB80056C4DE /* SNJoinListViewController.swift in Sources */,
 				438756911EBFF915007F6F0C /* SNInitialViewController.swift in Sources */,
+				43EA16831F54428500E54A95 /* SNConstants.swift in Sources */,
 				43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */,
+				43EA16851F54428C00E54A95 /* SNColors.swift in Sources */,
 				4302D7D01F1507340056C4DE /* SNSideMenuView.swift in Sources */,
 				4387568F1EBFF915007F6F0C /* AppDelegate.swift in Sources */,
 				43A2943D1F0ED6350036CDA6 /* SNCreateItemViewController.swift in Sources */,
