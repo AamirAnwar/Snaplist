@@ -150,7 +150,7 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func userLoggedIn() {
-        if let presentedVC = self.presentedViewController {
+        if let _ = self.presentedViewController {
             self.dismiss(animated: true, completion: nil)
         }
         refreshList()
