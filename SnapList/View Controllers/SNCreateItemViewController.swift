@@ -189,7 +189,7 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
             
             UIView.animate(withDuration: 0.2, animations: {
                 self.containerScrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight, 0)
-                if offsetAdustment > 0.0 {
+                if offsetAdustment > 0.0 && self.descriptionTextView.isFirstResponder {
                  self.containerScrollView.setContentOffset(CGPoint.init(x: self.containerScrollView.contentOffset.x, y: offsetAdustment + kButtonHeight/2), animated: true)
                 }
             }, completion: { (finished) in

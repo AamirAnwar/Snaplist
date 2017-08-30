@@ -12,11 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var dropdown = SNNotificationDropdown.init()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        NotificationCenter.default.addObserver(self, selector: #selector(showDropdown(notification:)), name: NSNotification.Name(rawValue:NotificationDisplayDropdown), object: nil)
         return true
+    }
+    
+    func showDropdown(notification:NSNotification) {
+        if let message = notification.userInfo?["message"] as? String {
+            dropdown.setMessage(message)
+            dropdown.show()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                self.dropdown.hide()
+            })
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

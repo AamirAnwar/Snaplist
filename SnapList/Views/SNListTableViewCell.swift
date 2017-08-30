@@ -40,7 +40,6 @@ class SNListTableViewCell: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
         
-        //descriptionLabel.text = "Some really long description can really come in handy here! I mean come on just look at this"
         descriptionLabel.textColor = UIColor.black
         descriptionLabel.textAlignment = .center
         descriptionLabel.font = SNFParagraph

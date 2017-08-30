@@ -13,7 +13,7 @@ public protocol SNSideMenuViewDelegate:NSObjectProtocol {
     func didSelectDeleteList() -> Void
 }
 
-class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
+class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate {
     
     
     var sideMenuTableView:UITableView
@@ -67,8 +67,12 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
         
         backgroundView.isUserInteractionEnabled = true
         backgroundView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(SNSideMenuView.didTapBackground)))
-        
+        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(gestureRecognizer:)))
+        panGesture.delegate = self
+        backgroundView.addGestureRecognizer(panGesture)
     }
+    
+    
     
     func didTapBackground() -> Void {
         toggleVisibility()
@@ -92,6 +96,11 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
         
+    }
+    
+    func toggleVisibility(withPanPercentage pan:CGFloat) {
+        self.backgroundView.backgroundColor = UIColor.clear.withAlphaComponent(min(0.6, pan))
+        self.containerView.transform = CGAffineTransform.init(translationX: -self.containerView.frame.width*(1.0-pan), y: 0)
     }
     
     func toggleVisibility() {
@@ -130,8 +139,24 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-
+    // MARK: Handle Pan
+    func handlePan(gestureRecognizer panGesture:UIPanGestureRecognizer) {
+        let translation = panGesture.location(in: self.backgroundView)
+        let percentage = translation.x/self.backgroundView.frame.width
+        //print(percentage)
+        switch panGesture.state {
+        case .ended:
+            toggleVisibility()
+        case .changed:
+            toggleVisibility(withPanPercentage: percentage)
+        default:
+            print()
+        }
+    }
+    
 }
+
+
 
 extension UIColor {
     convenience init(red:Int, green:Int, blue:Int) {
