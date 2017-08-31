@@ -10,9 +10,11 @@
 		4302D7CC1F14ECB80056C4DE /* SNJoinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302D7CB1F14ECB80056C4DE /* SNJoinListViewController.swift */; };
 		4302D7CE1F1505970056C4DE /* SNInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302D7CD1F1505970056C4DE /* SNInviteViewController.swift */; };
 		4302D7D01F1507340056C4DE /* SNSideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302D7CF1F1507340056C4DE /* SNSideMenuView.swift */; };
+		437C94561F571552004993CD /* SNSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C94551F571552004993CD /* SNSignUpViewController.swift */; };
+		437C94581F571DB8004993CD /* SNNotificationDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C94571F571DB8004993CD /* SNNotificationDropdown.swift */; };
 		43825E851F519BEB00439557 /* SNFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43825E841F519BEB00439557 /* SNFont.swift */; };
 		4387568F1EBFF915007F6F0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4387568E1EBFF915007F6F0C /* AppDelegate.swift */; };
-		438756911EBFF915007F6F0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438756901EBFF915007F6F0C /* ViewController.swift */; };
+		438756911EBFF915007F6F0C /* SNInitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438756901EBFF915007F6F0C /* SNInitialViewController.swift */; };
 		438756941EBFF915007F6F0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438756921EBFF915007F6F0C /* Main.storyboard */; };
 		438756961EBFF915007F6F0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438756951EBFF915007F6F0C /* Assets.xcassets */; };
 		438756991EBFF915007F6F0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438756971EBFF915007F6F0C /* LaunchScreen.storyboard */; };
@@ -20,6 +22,8 @@
 		43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */; };
 		43A2943B1F0EC74B0036CDA6 /* SNListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */; };
 		43A2943D1F0ED6350036CDA6 /* SNCreateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */; };
+		43EA16831F54428500E54A95 /* SNConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EA16821F54428500E54A95 /* SNConstants.swift */; };
+		43EA16851F54428C00E54A95 /* SNColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EA16841F54428C00E54A95 /* SNColors.swift */; };
 		839B88C2E62844611721574E /* Pods_SnapList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28497F6697098397F89EC2AE /* Pods_SnapList.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,10 +33,12 @@
 		4302D7CB1F14ECB80056C4DE /* SNJoinListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNJoinListViewController.swift; sourceTree = "<group>"; };
 		4302D7CD1F1505970056C4DE /* SNInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNInviteViewController.swift; sourceTree = "<group>"; };
 		4302D7CF1F1507340056C4DE /* SNSideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNSideMenuView.swift; sourceTree = "<group>"; };
+		437C94551F571552004993CD /* SNSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSignUpViewController.swift; sourceTree = "<group>"; };
+		437C94571F571DB8004993CD /* SNNotificationDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNNotificationDropdown.swift; sourceTree = "<group>"; };
 		43825E841F519BEB00439557 /* SNFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNFont.swift; sourceTree = "<group>"; };
 		4387568B1EBFF915007F6F0C /* SnapList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4387568E1EBFF915007F6F0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		438756901EBFF915007F6F0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		438756901EBFF915007F6F0C /* SNInitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNInitialViewController.swift; sourceTree = "<group>"; };
 		438756931EBFF915007F6F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		438756951EBFF915007F6F0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		438756981EBFF915007F6F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,6 +47,8 @@
 		43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNListViewController.swift; sourceTree = "<group>"; };
 		43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNListTableViewCell.swift; sourceTree = "<group>"; };
 		43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNCreateItemViewController.swift; sourceTree = "<group>"; };
+		43EA16821F54428500E54A95 /* SNConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNConstants.swift; sourceTree = "<group>"; };
+		43EA16841F54428C00E54A95 /* SNColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNColors.swift; sourceTree = "<group>"; };
 		884F902A3624F51B8BD467F0 /* Pods-SnapList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnapList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnapList/Pods-SnapList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,11 +75,12 @@
 		43825E7F1F519B5200439557 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				438756901EBFF915007F6F0C /* ViewController.swift */,
+				438756901EBFF915007F6F0C /* SNInitialViewController.swift */,
 				4302D7CD1F1505970056C4DE /* SNInviteViewController.swift */,
 				43A2943C1F0ED6350036CDA6 /* SNCreateItemViewController.swift */,
 				4302D7CB1F14ECB80056C4DE /* SNJoinListViewController.swift */,
 				43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */,
+				437C94551F571552004993CD /* SNSignUpViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -82,6 +91,7 @@
 				438AC5E51F518D15006EBE07 /* SNRectButton.swift */,
 				43A2943A1F0EC74B0036CDA6 /* SNListTableViewCell.swift */,
 				4302D7CF1F1507340056C4DE /* SNSideMenuView.swift */,
+				437C94571F571DB8004993CD /* SNNotificationDropdown.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -108,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				4387568E1EBFF915007F6F0C /* AppDelegate.swift */,
-				43825E841F519BEB00439557 /* SNFont.swift */,
+				43EA16861F54441900E54A95 /* Commons */,
 				43825E7F1F519B5200439557 /* View Controllers */,
 				43825E801F519B5E00439557 /* Views */,
 				438756921EBFF915007F6F0C /* Main.storyboard */,
@@ -117,6 +127,16 @@
 				4387569A1EBFF915007F6F0C /* Info.plist */,
 			);
 			path = SnapList;
+			sourceTree = "<group>";
+		};
+		43EA16861F54441900E54A95 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				43825E841F519BEB00439557 /* SNFont.swift */,
+				43EA16821F54428500E54A95 /* SNConstants.swift */,
+				43EA16841F54428C00E54A95 /* SNColors.swift */,
+			);
+			path = Commons;
 			sourceTree = "<group>";
 		};
 		DF7022B957EFF3D2D9E0932B /* Pods */ = {
@@ -257,8 +277,12 @@
 				4302D7CE1F1505970056C4DE /* SNInviteViewController.swift in Sources */,
 				43825E851F519BEB00439557 /* SNFont.swift in Sources */,
 				4302D7CC1F14ECB80056C4DE /* SNJoinListViewController.swift in Sources */,
-				438756911EBFF915007F6F0C /* ViewController.swift in Sources */,
+				438756911EBFF915007F6F0C /* SNInitialViewController.swift in Sources */,
+				43EA16831F54428500E54A95 /* SNConstants.swift in Sources */,
 				43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */,
+				437C94581F571DB8004993CD /* SNNotificationDropdown.swift in Sources */,
+				437C94561F571552004993CD /* SNSignUpViewController.swift in Sources */,
+				43EA16851F54428C00E54A95 /* SNColors.swift in Sources */,
 				4302D7D01F1507340056C4DE /* SNSideMenuView.swift in Sources */,
 				4387568F1EBFF915007F6F0C /* AppDelegate.swift in Sources */,
 				43A2943D1F0ED6350036CDA6 /* SNCreateItemViewController.swift in Sources */,

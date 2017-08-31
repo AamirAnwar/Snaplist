@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-let SNLightGray = UIColor.init(hex: 0xF1F1F1)
+
 class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SNSideMenuViewDelegate {
 
     @IBOutlet weak var listTableView: UITableView!
@@ -33,16 +33,23 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         listTableView.separatorStyle = .none
         listTableView.register(SNListTableViewCell.self, forCellReuseIdentifier: "listcell")
         
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "initialViewController")
-        
-        if let vc = initialViewController as? ViewController {
-            self.present(vc, animated: true, completion: nil)
-        }
         
         self.navigationItem.setRightBarButton(UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(SNListViewController.didTapAddItem)), animated: true)
         self.navigationItem.setLeftBarButton(UIBarButtonItem.init(title: "Menu", style: .plain, target: self, action: #selector(SNListViewController.didTapMenuButton)), animated: true)
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        presentInitialViewController()
+    }
+    
+    func presentInitialViewController() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "initialViewController")
+        if let vc = initialViewController as? SNInitialViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func didTapMenuButton() {
@@ -52,7 +59,6 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func didTapAddItem(sender:AnyObject) {
-        
         self.present(SNCreateItemViewController(), animated: true, completion: nil)
     }
 
@@ -69,11 +75,7 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = listTableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? SNListTableViewCell
-        if cell == nil {
-            cell = SNListTableViewCell.init(style: .default, reuseIdentifier: "listcell")
-        }
-        
+        let cell = listTableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? SNListTableViewCell
         if listItems.isEmpty {
             cell?.titleLabel.text = "Welcome to Snaplist"
             cell?.descriptionLabel.text = "Press the add button on the top right to start adding items to your list!"
@@ -114,43 +116,42 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }))
         
         self.present(alertController, animated: true, completion: nil)
-        
-        
     }
 
     func refreshList() {
         // Fetch existing items
-        let listItemsEndpoint = "\(basePath)/list/\(UserDefaults.standard.value(forKey: KeyListID)!)"
-        Alamofire.request(listItemsEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                return
-            }
-            
-            guard let value = response.result.value as? [String:Any], let listObject = value["list"] as? [String:Any] else {
-                return
-            }
-            if let shareCode = listObject["shareCode"] {
-                UserDefaults.standard.setValue(shareCode, forKey: KeyShareCode)
-            }
-            
-            if let items = listObject["items"] as? Array<[String:Any]> {
-                self.listItems.removeAll()
-                for item in items {
-                    if let item = item as? [String:String] {
-                        if let title = item["title"], let content = item["content"] {
-                            self.listItems.append((title, content))
-                        }
-                    }
+        if let listID = UserDefaults.standard.value(forKey: KeyListID) {
+            let listItemsEndpoint = "\(basePath)/list/\(listID)"
+            Alamofire.request(listItemsEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                guard response.result.isSuccess else {
+                    return
                 }
                 
+                guard let value = response.result.value as? [String:Any], let listObject = value["list"] as? [String:Any] else {
+                    return
+                }
+                if let shareCode = listObject["shareCode"] {
+                    UserDefaults.standard.setValue(shareCode, forKey: KeyShareCode)
+                }
+                
+                if let items = listObject["items"] as? Array<[String:Any]> {
+                    self.listItems.removeAll()
+                    for item in items {
+                        if let item = item as? [String:String] {
+                            if let title = item["title"], let content = item["content"] {
+                                self.listItems.append((title, content))
+                            }
+                        }
+                    }
+                    
+                }
+                self.listTableView.reloadData()
             }
-            
-            self.listTableView.reloadData()
         }
     }
     
     func userLoggedIn() {
-        if let presentedVC = self.presentedViewController {
+        if let _ = self.presentedViewController {
             self.dismiss(animated: true, completion: nil)
         }
         refreshList()
