@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Crashlytics
 class SNSignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -119,6 +120,7 @@ class SNSignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelButtonTapped() {
+        Crashlytics.sharedInstance().crash()
         self.dismiss(animated: true, completion: nil)
     }
 
