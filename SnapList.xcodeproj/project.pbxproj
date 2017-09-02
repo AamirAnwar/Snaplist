@@ -10,6 +10,8 @@
 		4302D7CC1F14ECB80056C4DE /* SNJoinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302D7CB1F14ECB80056C4DE /* SNJoinListViewController.swift */; };
 		4302D7CE1F1505970056C4DE /* SNInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302D7CD1F1505970056C4DE /* SNInviteViewController.swift */; };
 		4302D7D01F1507340056C4DE /* SNSideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4302D7CF1F1507340056C4DE /* SNSideMenuView.swift */; };
+		43133C3C1F5AA83200DA4D5B /* SNHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43133C3B1F5AA83100DA4D5B /* SNHelpers.swift */; };
+		43133C3E1F5ABB1D00DA4D5B /* SNLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43133C3D1F5ABB1D00DA4D5B /* SNLoginViewController.swift */; };
 		437C94561F571552004993CD /* SNSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C94551F571552004993CD /* SNSignUpViewController.swift */; };
 		437C94581F571DB8004993CD /* SNNotificationDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C94571F571DB8004993CD /* SNNotificationDropdown.swift */; };
 		43825E851F519BEB00439557 /* SNFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43825E841F519BEB00439557 /* SNFont.swift */; };
@@ -33,6 +35,8 @@
 		4302D7CB1F14ECB80056C4DE /* SNJoinListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNJoinListViewController.swift; sourceTree = "<group>"; };
 		4302D7CD1F1505970056C4DE /* SNInviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNInviteViewController.swift; sourceTree = "<group>"; };
 		4302D7CF1F1507340056C4DE /* SNSideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNSideMenuView.swift; sourceTree = "<group>"; };
+		43133C3B1F5AA83100DA4D5B /* SNHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNHelpers.swift; sourceTree = "<group>"; };
+		43133C3D1F5ABB1D00DA4D5B /* SNLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNLoginViewController.swift; sourceTree = "<group>"; };
 		437C94551F571552004993CD /* SNSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSignUpViewController.swift; sourceTree = "<group>"; };
 		437C94571F571DB8004993CD /* SNNotificationDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNNotificationDropdown.swift; sourceTree = "<group>"; };
 		43825E841F519BEB00439557 /* SNFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNFont.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 				4302D7CB1F14ECB80056C4DE /* SNJoinListViewController.swift */,
 				43A294321F0EAF6A0036CDA6 /* SNListViewController.swift */,
 				437C94551F571552004993CD /* SNSignUpViewController.swift */,
+				43133C3D1F5ABB1D00DA4D5B /* SNLoginViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 				43825E841F519BEB00439557 /* SNFont.swift */,
 				43EA16821F54428500E54A95 /* SNConstants.swift */,
 				43EA16841F54428C00E54A95 /* SNColors.swift */,
+				43133C3B1F5AA83100DA4D5B /* SNHelpers.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -280,12 +286,14 @@
 				438756911EBFF915007F6F0C /* SNInitialViewController.swift in Sources */,
 				43EA16831F54428500E54A95 /* SNConstants.swift in Sources */,
 				43A294331F0EAF6A0036CDA6 /* SNListViewController.swift in Sources */,
+				43133C3C1F5AA83200DA4D5B /* SNHelpers.swift in Sources */,
 				437C94581F571DB8004993CD /* SNNotificationDropdown.swift in Sources */,
 				437C94561F571552004993CD /* SNSignUpViewController.swift in Sources */,
 				43EA16851F54428C00E54A95 /* SNColors.swift in Sources */,
 				4302D7D01F1507340056C4DE /* SNSideMenuView.swift in Sources */,
 				4387568F1EBFF915007F6F0C /* AppDelegate.swift in Sources */,
 				43A2943D1F0ED6350036CDA6 /* SNCreateItemViewController.swift in Sources */,
+				43133C3E1F5ABB1D00DA4D5B /* SNLoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
