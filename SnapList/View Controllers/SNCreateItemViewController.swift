@@ -155,8 +155,10 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
         if let listID = UserDefaults.standard.value(forKey: KeyListID), let title = titleTextField.text, let content = descriptionTextView.text {
             let addItemEndpoint = "\(basePath)/list/\(listID)/item"
             createButton.showLoader()
+            createButton.isUserInteractionEnabled = false
             Alamofire.request(addItemEndpoint, method: .post, parameters:["title":title,"content":content], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
                 self.createButton.hideLoader()
+                self.createButton.isUserInteractionEnabled = true
                 guard response.result.isSuccess else {
                     return
                 }

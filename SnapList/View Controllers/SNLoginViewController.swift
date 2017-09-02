@@ -42,10 +42,13 @@ class SNLoginViewController: UIViewController {
             let loginEndpoint = "\(basePath)/auth"
             let params = ["email":emailID, "password":password]
             loginButton.showLoader()
+            loginButton.isUserInteractionEnabled = false
             Alamofire.request(loginEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
+                self.loginButton.isUserInteractionEnabled = true
+                self.loginButton.hideLoader()
+                
                 guard response.result.isSuccess else {
                     SNHelpers.showDropdownWith(message: "Something went wrong")
-                    self.loginButton.hideLoader()
                     return
                 }
                 guard let responseObject = response.result.value as? [String:Any] else {
