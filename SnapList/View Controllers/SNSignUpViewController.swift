@@ -120,7 +120,6 @@ class SNSignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancelButtonTapped() {
-        Crashlytics.sharedInstance().crash()
         self.dismiss(animated: true, completion: nil)
     }
 
