@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Crashlytics
 class SNSignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
