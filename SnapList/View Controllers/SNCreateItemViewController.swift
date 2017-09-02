@@ -152,23 +152,28 @@ class SNCreateItemViewController: UIViewController, UITextFieldDelegate {
     
     func createButtonTapped() {
         // Add item API call
-        let addItemEndpoint = "\(basePath)/list/\(UserDefaults.standard.value(forKey: KeyListID)!)/item"
-        let title:String = titleTextField.text!
-        let content:String = descriptionTextView.text!
-        createButton.showLoader()
-        Alamofire.request(addItemEndpoint, method: .post, parameters:["title":title,"content":content], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            self.createButton.hideLoader()
-            guard response.result.isSuccess else {
-                return
+        if let listID = UserDefaults.standard.value(forKey: KeyListID), let title = titleTextField.text, let content = descriptionTextView.text {
+            let addItemEndpoint = "\(basePath)/list/\(listID)/item"
+            createButton.showLoader()
+            createButton.isUserInteractionEnabled = false
+            Alamofire.request(addItemEndpoint, method: .post, parameters:["title":title,"content":content], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                self.createButton.hideLoader()
+                self.createButton.isUserInteractionEnabled = true
+                guard response.result.isSuccess else {
+                    return
+                }
+                guard let value = response.result.value as? [String:Any], let shareCode = value["shareCode"] as? String else {
+                    return
+                }
+                // Refresh list page. TODO - Add locally and then sync with server (Possible diffing? IGListKit use case)
+                UserDefaults.standard.setValue(shareCode, forKey: KeyShareCode)
+                
+                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: NotificationItemAdded), object: nil)
+                self.dismiss(animated: true, completion: nil)
             }
-            guard let value = response.result.value as? [String:Any], let shareCode = value["shareCode"] as? String else {
-                return
-            }
-            // Refresh list page. TODO - Add locally and then sync with server (Possible diffing? IGListKit use case)
-            UserDefaults.standard.setValue(shareCode, forKey: KeyShareCode)
-            
-            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: NotificationItemAdded), object: nil)
-            self.dismiss(animated: true, completion: nil)
+        }
+        else {
+            SNHelpers.showDropdownWith(message: "Invalid entries!")
         }
     }
     

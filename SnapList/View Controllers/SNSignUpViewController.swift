@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Crashlytics
 class SNSignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -72,7 +73,10 @@ class SNSignUpViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 guard let value = response.result.value as? [String:Any], let userID = value["id"] as? String else {
-                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+                    
+                    if let value = response.result.value as? [String:Any],let errorMessage = value["err"] as? String {
+                        SNHelpers.showDropdownWith(message: errorMessage)
+                    }
                     print("Bad Data")
                     return
                 }
@@ -86,10 +90,11 @@ class SNSignUpViewController: UIViewController, UITextFieldDelegate {
                         return
                     }
                     guard let value = response.result.value as? [String:Any], let userID = value["id"] as? String else {
-                        print("Bad Data")
+                        if let value = response.result.value as? [String:Any],let errorMessage = value["err"] as? String {
+                            SNHelpers.showDropdownWith(message: errorMessage)
+                        }
                         return
                     }
-                    print(response.result.value!)
                     UserDefaults.standard.set(userID, forKey: KeyListID)
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
                 })

@@ -9,8 +9,10 @@
 import UIKit
 
 public protocol SNSideMenuViewDelegate:NSObjectProtocol {
+    func didSelectJoinList() -> Void
     func didSelectInviteOthers() -> Void
     func didSelectDeleteList() -> Void
+    func didSelectLogout() -> Void
 }
 
 class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate {
@@ -60,9 +62,10 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource,UIGestur
         
         backgroundView.backgroundColor = UIColor.clear
         
-        
+        tableViewData.append("Join a list")
         tableViewData.append("Invite Others")
         tableViewData.append("Delete List")
+        tableViewData.append("Log out")
         
         
         backgroundView.isUserInteractionEnabled = true
@@ -83,13 +86,13 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource,UIGestur
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return tableViewData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = sideMenuTableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell", for: indexPath)
         cell.textLabel?.text = tableViewData[indexPath.row]
-        if indexPath.row == 1 {
+        if indexPath.row == (tableViewData.count - 1) {
             cell.textLabel?.textColor = UIColor.red.withAlphaComponent(0.8)
         }
         cell.textLabel?.textAlignment = .center
@@ -131,9 +134,13 @@ class SNSideMenuView: UIView, UITableViewDelegate,UITableViewDataSource,UIGestur
         toggleVisibility()
         switch indexPath.row {
         case 0:
-            delegate?.didSelectInviteOthers()
+            delegate?.didSelectJoinList()
         case 1:
+            delegate?.didSelectInviteOthers()
+        case 2:
             delegate?.didSelectDeleteList()
+        case 3:
+            delegate?.didSelectLogout()
         default:
             return
         }

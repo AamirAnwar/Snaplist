@@ -41,7 +41,9 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        presentInitialViewController()
+        if SNHelpers.isUserLoggedIn() == false {
+            presentInitialViewController()
+        }
     }
     
     func presentInitialViewController() {
@@ -89,6 +91,17 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell!
     }
     
+    func didSelectLogout() {
+        SNHelpers.logoutUser()
+        presentInitialViewController()
+    }
+    
+    func didSelectJoinList() {
+        if let joinListVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SNJoinListViewController") as? SNJoinListViewController {
+            self.present(joinListVC, animated: true, completion: nil)
+        }
+    }
+    
     func didSelectInviteOthers() {
         if let inviteOthersVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SNInviteViewController") as? SNInviteViewController {
             self.navigationController?.pushViewController(inviteOthersVC, animated: true)
@@ -101,10 +114,18 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
         alertController.addAction(UIAlertAction.init(title: "Yes", style: .destructive, handler: { (action) in
             if let listID = UserDefaults.standard.object(forKey: KeyListID), let userID = UserDefaults.standard.object(forKey: KeyUserID) {
                 let deleteListEndPoint = "\(basePath)/list/\(listID)/user/\(userID)"
-                Alamofire.request(deleteListEndPoint, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseString(completionHandler: { (response) in
+                Alamofire.request(deleteListEndPoint, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
                     guard response.result.isSuccess else {
+                        SNHelpers.showDropdownWith(message: "Something went wrong!")
                         return
                     }
+                    
+                    guard let responseObject = response.result.value as? [String:Any], let listID = responseObject["id"] else {
+                        SNHelpers.showDropdownWith(message: "Something went wrong!")
+                        return;
+                    }
+                    print("User removed from list! \(listID)");
+                    SNHelpers.logoutUser()
                     self.navigationController?.present(UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "initialViewController"), animated: true, completion: nil)
                     
                 })
