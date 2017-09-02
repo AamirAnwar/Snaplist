@@ -29,14 +29,39 @@ class SNJoinListViewController: UIViewController {
             return
         }
         listID = listID.trimmingCharacters(in: .whitespacesAndNewlines)
-        let joinListEndpoint = "\(basePath)/list/\(listID)/user"
-        Alamofire.request(joinListEndpoint, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseString { (response) in
-            guard response.result.isSuccess else {
-                return
+        
+        if let userID = UserDefaults.standard.object(forKey: KeyUserID) {
+            let joinListEndpoint = "\(basePath)/list/\(listID)/user"
+            let params = ["userId":userID];
+            Alamofire.request(joinListEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                guard response.result.isSuccess else {
+                    SNHelpers.showDropdownWith(message: "Something went wrong!")
+                    return
+                }
+                guard let responseObject = response.result.value as? [String:Any] else {
+                    SNHelpers.showDropdownWith(message: "Invalid list ID!")
+                    return;
+                }
+                
+                if let listID = responseObject["_id"] {
+                    UserDefaults.standard.setValue(listID, forKey: KeyListID)
+                    // Dismiss both presented view controller and update list view here
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+                }
+                else {
+                    if let errorMessage = responseObject["err"] as? String {
+                        SNHelpers.showDropdownWith(message:errorMessage)
+                    }
+                    else {
+                        SNHelpers.showDropdownWith(message: "Invalid list ID!")
+                    }
+                }
+                
             }
-            
-            // Dismiss both presented view controller and update list view here
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
         }
+        else {
+            SNHelpers.showDropdownWith(message: "No UserID!")
+        }
+
     }
 }
