@@ -20,9 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         initializeGoogleAdmob()
-        Fabric.with([Crashlytics.self])
+        initializeCrashlytics()
         NotificationCenter.default.addObserver(self, selector: #selector(showDropdown(notification:)), name: NSNotification.Name(rawValue:NotificationDisplayDropdown), object: nil)
         return true
+    }
+    
+    func initializeCrashlytics() {
+        Fabric.with([Crashlytics.self])
     }
     
     func initializeGoogleAdmob() {
