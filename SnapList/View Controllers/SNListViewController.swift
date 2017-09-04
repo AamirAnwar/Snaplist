@@ -116,12 +116,12 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let deleteListEndPoint = "\(basePath)/list/\(listID)/user/\(userID)"
                 Alamofire.request(deleteListEndPoint, method: .delete, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
                     guard response.result.isSuccess else {
-                        SNHelpers.showDropdownWith(message: "Something went wrong!")
+                        SNHelpers.showDropdownWith(message: KFailureMessage)
                         return
                     }
                     
                     guard let responseObject = response.result.value as? [String:Any], let listID = responseObject["id"] else {
-                        SNHelpers.showDropdownWith(message: "Something went wrong!")
+                        SNHelpers.showDropdownWith(message: KFailureMessage)
                         return;
                     }
                     print("User removed from list! \(listID)");

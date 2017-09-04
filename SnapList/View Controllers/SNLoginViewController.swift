@@ -48,11 +48,11 @@ class SNLoginViewController: UIViewController {
                 self.loginButton.hideLoader()
                 
                 guard response.result.isSuccess else {
-                    SNHelpers.showDropdownWith(message: "Something went wrong")
+                    SNHelpers.showDropdownWith(message: KFailureMessage)
                     return
                 }
                 guard let responseObject = response.result.value as? [String:Any] else {
-                    SNHelpers.showDropdownWith(message: "Something went wrong")
+                    SNHelpers.showDropdownWith(message: KFailureMessage)
                     self.loginButton.hideLoader()
                     return
                 }
@@ -64,12 +64,12 @@ class SNLoginViewController: UIViewController {
                     let getUserEndpoint = "\(basePath)/user/\(userID)"
                     Alamofire.request(getUserEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
                         guard response.result.isSuccess else {
-                            SNHelpers.showDropdownWith(message: "Something went wrong")
+                            SNHelpers.showDropdownWith(message: KFailureMessage)
                             self.loginButton.hideLoader()
                             return
                         }
                         guard let responseObject = response.result.value as? [String:Any] else {
-                            SNHelpers.showDropdownWith(message: "Something went wrong")
+                            SNHelpers.showDropdownWith(message: KFailureMessage)
                             self.loginButton.hideLoader()
                             return
                         }
@@ -105,7 +105,7 @@ class SNLoginViewController: UIViewController {
                 }
                 else {
                     self.loginButton.hideLoader()
-                    SNHelpers.showDropdownWith(message: "Something went wrong")
+                    SNHelpers.showDropdownWith(message: KFailureMessage)
                 }
             })
         }
