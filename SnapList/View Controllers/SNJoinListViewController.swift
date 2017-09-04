@@ -35,7 +35,7 @@ class SNJoinListViewController: UIViewController {
             let params = ["userId":userID];
             Alamofire.request(joinListEndpoint, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
                 guard response.result.isSuccess else {
-                    SNHelpers.showDropdownWith(message: "Something went wrong!")
+                    SNHelpers.showDropdownWith(message: KFailureMessage)
                     return
                 }
                 guard let responseObject = response.result.value as? [String:Any] else {
