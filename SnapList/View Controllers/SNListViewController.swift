@@ -86,18 +86,20 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = listTableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? SNListTableViewCell
-        if listItems.isEmpty {
-            cell?.titleLabel.text = "Welcome to Snaplist"
-            cell?.descriptionLabel.text = "Press the add button on the top right to start adding items to your list!"
-        }
-        else {
-            let (title, content) = listItems[indexPath.row]
-            cell?.titleLabel.text = title
-            cell?.descriptionLabel.text = content
+        let cell = listTableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath)
+        if let cell = cell as? SNListTableViewCell {
+            if listItems.isEmpty {
+                cell.titleLabel.text = "Welcome to Snaplist"
+                cell.descriptionLabel.text = "Press the add button on the top right to start adding items to your list!"
+            }
+            else {
+                let (title, content) = listItems[indexPath.row]
+                cell.titleLabel.text = title
+                cell.descriptionLabel.text = content
+            }
         }
         
-        return cell!
+        return cell
     }
     
     func didSelectLogout() {
