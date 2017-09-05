@@ -14,29 +14,38 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var listTableView: UITableView!
     var sideMenuView:SNSideMenuView!
     var listItems:Array<(title:String,content:String)> = Array()
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerForNotifications()
+        createSideMenuView()
+        configureListTableView()
         
-        // Register for notification
-        NotificationCenter.default.addObserver(self, selector: #selector(SNListViewController.userLoggedIn), name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SNListViewController.itemAdded), name: NSNotification.Name(rawValue: NotificationItemAdded), object: nil)
+        self.navigationItem.setRightBarButton(UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(SNListViewController.didTapAddItem)), animated: true)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem.init(title: "Menu", style: .plain, target: self, action: #selector(SNListViewController.didTapMenuButton)), animated: true)
         
+    }
+    
+    func createSideMenuView() {
         sideMenuView = SNSideMenuView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         sideMenuView.transform = CGAffineTransform.init(translationX: -sideMenuView.frame.size.width, y: 0)
         sideMenuView.delegate = self
         self.navigationController?.view.addSubview(sideMenuView)
+    }
+    
+    func configureListTableView() {
         listTableView.rowHeight = UITableViewAutomaticDimension
         listTableView.estimatedRowHeight = 44
         listTableView.backgroundColor = SNLightGray
         listTableView.tableFooterView = UIView()
         listTableView.separatorStyle = .none
         listTableView.register(SNListTableViewCell.self, forCellReuseIdentifier: "listcell")
-        
-        
-        self.navigationItem.setRightBarButton(UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(SNListViewController.didTapAddItem)), animated: true)
-        self.navigationItem.setLeftBarButton(UIBarButtonItem.init(title: "Menu", style: .plain, target: self, action: #selector(SNListViewController.didTapMenuButton)), animated: true)
-        
+    }
+    
+    func registerForNotifications() {
+        // Register for notification
+        NotificationCenter.default.addObserver(self, selector: #selector(SNListViewController.userLoggedIn), name: NSNotification.Name(rawValue: NotificationUserLoggedSuccessfully), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SNListViewController.itemAdded), name: NSNotification.Name(rawValue: NotificationItemAdded), object: nil)
     }
     
     override func viewDidLayoutSubviews() {
