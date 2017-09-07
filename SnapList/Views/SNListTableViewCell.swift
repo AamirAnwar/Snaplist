@@ -69,5 +69,10 @@ class SNListTableViewCell: UITableViewCell {
             descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant:-20)
             ])
     }
+    
+    func configureWith(listItem item:ListItem) {
+        titleLabel.text = item.title
+        descriptionLabel.text = item.content
+    }
 
 }

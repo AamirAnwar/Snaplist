@@ -9,11 +9,19 @@
 import UIKit
 import Alamofire
 
+struct ListItem:CustomStringConvertible {
+    var title:String
+    var content:String
+    var description: String {
+        return "Item with title:\(title) content:\(content)"
+    }
+}
+
 class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SNSideMenuViewDelegate {
 
     @IBOutlet weak var listTableView: UITableView!
     var sideMenuView:SNSideMenuView!
-    var listItems:Array<(title:String,content:String)> = Array()
+    var listItems:Array<ListItem> = []
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,9 +101,8 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.descriptionLabel.text = "Press the add button on the top right to start adding items to your list!"
             }
             else {
-                let (title, content) = listItems[indexPath.row]
-                cell.titleLabel.text = title
-                cell.descriptionLabel.text = content
+                let item = listItems[indexPath.row]
+                cell.configureWith(listItem:item)
             }
         }
         
@@ -171,7 +178,7 @@ class SNListViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     for item in items {
                         if let item = item as? [String:String] {
                             if let title = item["title"], let content = item["content"] {
-                                self.listItems.append((title, content))
+                                self.listItems.append(ListItem(title: title, content: content))
                             }
                         }
                     }
