@@ -10,15 +10,15 @@ import Foundation
 
 // A namespace for storing common type methods specific to this program
 enum SNHelpers {
-    static public func showFailureDropdown() {
+    static func showFailureDropdown() {
         SNHelpers.showDropdownWith(message:KFailureMessage)
     }
     
-    static public func showDropdownWith(message msg:String) {
+    static func showDropdownWith(message msg:String) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue:NotificationDisplayDropdown), object: nil, userInfo: ["message":msg])
     }
     
-    static public func logoutUser() {
+    static func logoutUser() {
         UserDefaults.standard.removeObject(forKey: KeyListID)
         UserDefaults.standard.removeObject(forKey: KeyUserID)
     }

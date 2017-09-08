@@ -29,12 +29,12 @@ class SNRectButton: UIButton {
         self.addSubview(loader)
     }
     
-    public func showLoader() {
+    func showLoader() {
         loader.frame = CGRect(x: 2*PADDING_8, y: ceil(self.frame.size.height/2) - LoaderSize/2, width: LoaderSize, height: LoaderSize)
         loader.startAnimating()
     }
     
-    public func hideLoader() {
+    func hideLoader() {
         loader.stopAnimating()
     }
     
