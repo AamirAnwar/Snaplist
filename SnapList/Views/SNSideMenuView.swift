@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol SNSideMenuViewDelegate:NSObjectProtocol {
+protocol SNSideMenuViewDelegate:NSObjectProtocol {
     func didSelectJoinList() -> Void
     func didSelectInviteOthers() -> Void
     func didSelectDeleteList() -> Void
